@@ -134,6 +134,22 @@ Implemente un programa en C que permita calcular la función matemática norma 2
 
 #+BEGIN_SRC C 
 #include <stdio.h>
+#include <math.h>
+
+int main()
+{
+  int nums[4] = {4,0,0,3};  // Vector de primos, inicializo los dos primeros, y el resto quedan a 0
+  int i;  
+  float sum = 0;
+  
+  for (i = 0; i < 4; i++) 
+  { 
+      sum = sum + nums[i]*nums[i];
+  }
+    
+  printf ("Norma: %f.", sqrt(sum));
+  return 0;
+}
 
 #+END_SRC
 
@@ -188,7 +204,7 @@ Cuando se complete el cálculo el programa debe mostrar el contenido del vector.
 #include <stdio.h>
 
 #define N 300
-
+// Solución en la que se guardan los número primos en orden sin saltar ninguna posición
 int main()
 {
   int p;   // Numero a comprobar
@@ -206,9 +222,10 @@ int main()
     i = 0;
     // Con while comprobamos el resto de la division del numero p
     // con todos los primos anteriores
-    while(esPrimo && i < ind_primo)
+    while((esPrimo==1) && (i < ind_primo))
     {
       // Si alguno de los restos es cero
+      // se compara contra los numeros primos que se han encontrado antes
       if (p % primos[i] == 0)
       {
         // el numero p deja de ser primo, y salgo del while
@@ -239,6 +256,62 @@ int main()
 }
 #+END_SRC
 
+Solución 2: 
+#+BEGIN_SRC C 
+#include <stdio.h>
+
+#define N 300
+// Solución en la que se guardan los número primos saltando posiciones, pero solo se muestran los que son distintos de cero
+int main()
+{
+  int p;   // Numero a comprobar
+  int i;   // Indice de bucles
+  int primos[N] = {2, 3};  // Vector de primos, inicializo los dos primeros, y el resto quedan a 0
+    
+  int esPrimo; // Booleano para indicar si es primo o no
+
+  // Empiezo comprobando desde el 5
+  for (p = 5; p <= N; p++) 
+  { 
+    // Inicialmente es primo
+    esPrimo = 1;
+    i = 2;
+    // Con while comprobamos el resto de la division del numero p
+    // con todos los primos anteriores
+    while((esPrimo==1) && (i < p))
+    {
+      // Si alguno de los restos es cero
+      // se compara contra los numeros primos que se han encontrado antes
+      if (p % i == 0)
+      {
+        // el numero p deja de ser primo, y salgo del while
+        esPrimo = 0;
+      }
+      // En caso contrario sigo avanzando
+      i++;
+    }
+    // Si salgo del bucle sin haber encontrado un resto igual a
+    // cero, esPrimo sigue valiendo 1, lo que indica que se mantiene
+    // la condicion de ser primo
+    if (esPrimo)
+    { 
+      // y por tanto debo almacenar ese numero en el vector
+      primos[p] = p;
+    }
+  }
+  // Muestro el resultado en pantalla
+  for (i = 0; i < N; i++)
+  {
+     //printf ("%i ", primos[i]);
+     if (primos[i] != 0)
+     {
+        printf ("%i ", primos[i]);   
+      }
+  }    
+  printf ("\n");
+  return 0;
+}
+#+END_SRC
 
 
 * Fibonacci
