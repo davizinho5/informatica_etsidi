@@ -7,8 +7,241 @@
 #+EXPORT_FILE_NAME: ejercicios_tema4_vectores.pdf
 
 
-* Fibonacci
+* Producto escalar de vectores
+Escribe un programa que realice el producto escalar de dos vectores. Use los dos vectores siguientes como ejemplo.
 
+#+BEGIN_SRC C  :exports code
+  float v1[5] = {1, 34, 32, 45, 34};
+  float v2[5] = {12, -3, 34, 15, -5};
+#+END_SRC
+
+#+BEGIN_SRC C 
+#include <stdio.h>
+int main()
+{
+  float v1[5] = {1, 34, 32, 45, 34};
+  floes at v2[5] = {12, -3, 34, 15, -5};
+  // Es necesario inicializar la variable para hacer la suma del producto escalar
+  float prod = 0;
+  int i;
+
+  for(i=0; i<5; i++)
+  {
+    prod = prod + v1[i] * v2[i];
+  }
+    
+  printf("El producto escalar es: %f\n", prod);
+  
+  return 0;
+}
+#+END_SRC
+
+#+RESULTS:
+: El producto escalar es: 1503.000000
+
+
+* Distancia 
+Escribe un programa que calcule la distancia entre dos puntos del plano utilizando vectores de dimensión 2 para codificar los puntos. 
+
+#+BEGIN_SRC C 
+#include <stdio.h>
+#include <math.h>
+
+int main()
+{
+  float p1[2], p2[2];
+  float d;
+        
+  printf("Primer punto\n");
+  scanf("%f %f", &p1[0], &p1[1]);
+        
+  printf("Segundo punto\n");
+  scanf("%f %f", &p2[0], &p2[1]);
+
+  d = sqrt(pow(p1[0] - p2[0], 2) + pow(p1[1] - p2[1], 2));
+  
+  printf("La distancia entre los puntos es %f\n", d);
+
+  return 0;
+}
+
+#+END_SRC
+
+
+* Máximo, mínimo y promedio de una colección de números
+Escribe un programa que calcule y muestre en pantalla el máximo, mínimo y promedio de una colección de 10 valores de tipo entero que se introducen por teclado. 
+
+#+BEGIN_SRC C 
+#include <stdio.h>
+
+#define N 10
+
+int main()
+{
+
+  int vector[N], i;
+  int min, max;
+  float media;
+
+  printf("Escribe %d números enteros.\n", N);
+  // Rellena los valores del vector
+  for (i = 0; i < N; i++)
+  {
+    scanf("%i", &vector[i]);
+  }
+    
+  // Máximo
+  // Inicialmente, consideramos que el maximo inicial es el primer elemento
+  max = vector[0]; 
+  // Se busca en el vector si algún valor es mayor
+  for (i = 1; i < N; i++)
+  {
+    if (vector[i] > max)
+    {
+      // y se sustituye el valor de max si lo encuentra
+      max = vector[i]; 
+    } 
+  }
+
+  // Mínimo
+  // Inicialmente, consideramos que el minimo inicial es el primer elemento
+  min = vector[0];  
+  for (i = 1; i < N; i++)
+  {
+    if (vector[i] < min) 
+    {
+      min = vector[i];
+    }
+  }
+
+  // Promedio
+  media = 0.0;
+  for (i = 0; i < N; i++)
+  {
+    media = media + vector[i];
+  }
+  media =  media / N;
+
+  printf("El máximo es %i, el mínimo es %i, y el promedio es %f.\n", max, min, media);
+
+  return 0;
+}
+#+END_SRC
+
+
+* Norma 2
+Implemente un programa en C que permita calcular la función matemática norma 2.
+
+#+BEGIN_SRC C 
+#include <stdio.h>
+
+#+END_SRC
+
+
+* Números al revés
+Escriba un programa que almacene en un vector una cantidad n de números enteros positivos. El programa deberá almacenar en otro vector los elementos guardados en el vector inicial de forma invertida, esto es, el último elemento que está en el vector inicial, que ocupa la posición n-1, deberá quedar en la primera posición del otro vector y, el primer elemento almacenado en el vector inicial, quedará en la última posición del vector generado.
+
+#+BEGIN_SRC C 
+#include <stdio.h>
+
+#define N 4
+
+int main ()
+{
+  float vector_inicial[N], vector_final[N];
+  // Utilizaremos esta variable para llevar la cuenta de los datos válidos
+  int num_datos = 0;
+  do
+  {
+    printf( "Ingrese numeros positivos hasta llenar el vector: \n" );
+    scanf( "%f", &vector_inicial[num_datos] );
+    if( vector_inicial[num_datos] > 0)
+    {
+      // Si el dato es valido, actualizamos la cuenta
+      num_datos = num_datos + 1;
+    }
+  // continuamos pidiendo números hasta que se llena el vector     
+  }while(num_datos < N);
+  
+  int i;
+  for(i = 0; i < N; i++)
+  {
+    vector_final[i] = vector_inicial[N-1-i];
+  }
+  
+  for (i = 0; i < N; i++)
+  {
+    printf( "%.1f  ", vector_inicial[i]);
+    printf( "%.1f \n", vector_final[i]);
+  }
+
+  return 0;
+}
+#+END_SRC
+
+
+* Números primos
+Realiza un programa que calcule los números primos comprendidos entre el 1 y el 300 y los almacene en un vector.  
+Cuando se complete el cálculo el programa debe mostrar el contenido del vector. 
+
+#+BEGIN_SRC C 
+#include <stdio.h>
+
+#define N 300
+
+int main()
+{
+  int p;   // Numero a comprobar
+  int i;   // Indice de bucles
+  int ind_primo = 2;       // Indice del vector primos, que indica la primera posicion libre
+  int primos[N] = {2, 3};  // Vector de primos, inicializo los dos primeros, y el resto quedan a 0
+    
+  int esPrimo; // Booleano para indicar si es primo o no
+
+  // Empiezo comprobando desde el 5
+  for (p = 5; p <= N; p++) 
+  { 
+    // Inicialmente es primo
+    esPrimo = 1;
+    i = 0;
+    // Con while comprobamos el resto de la division del numero p
+    // con todos los primos anteriores
+    while(esPrimo && i < ind_primo)
+    {
+      // Si alguno de los restos es cero
+      if (p % primos[i] == 0)
+      {
+        // el numero p deja de ser primo, y salgo del while
+        esPrimo = 0;
+      }
+      // En caso contrario sigo avanzando
+      i++;
+    }
+    // Si salgo del bucle sin haber encontrado un resto igual a
+    // cero, esPrimo sigue valiendo 1, lo que indica que se mantiene
+    // la condicion de ser primo
+    if (esPrimo)
+    { 
+      // y por tanto debo almacenar ese numero en el vector
+      primos[ind_primo] = p;
+      //y avanzar el indice del vector
+      ind_primo = ind_primo + 1;
+    }
+  }
+  // Muestro el resultado en pantalla
+  for (i = 0; i < ind_primo; i++)
+  {
+    printf ("%i ", primos[i]);
+  }
+    
+  printf ("\n");
+  return 0;
+}
+#+END_SRC
+
+
+
+* Fibonacci
 Escribe un programa que genere los 20 primeros términos de la serie de Fibonacci y los almacene en un vector. 
 
 #+BEGIN_SRC C 
@@ -37,191 +270,9 @@ int main ()
 #+END_SRC
 
 
-* Producto escalar de vectores
-
-Escribe un programa que realice el producto escalar de dos vectores. Use los dos vectores siguientes como ejemplo.
-
-#+BEGIN_SRC C  :exports code
-  float v1[5] = {1, 34, 32, 45, 34};
-  float v2[5] = {12, -3, 34, 15, -5};
-#+END_SRC
-
-#+BEGIN_SRC C 
-#include <stdio.h>
-int main()
-{
-  float v1[5] = {1, 34, 32, 45, 34};
-  float v2[5] = {12, -3, 34, 15, -5};
-  float prod = 0;
-  int i;
-
-  for(i=0; i<5; i++)
-  {
-    prod = prod + v1[i] * v2[i];
-  }
-    
-  printf("El producto escalar es: %f\n", prod);
-  
-  return 0;
-}
-#+END_SRC
-
-#+RESULTS:
-: El producto escalar es: 1503.000000
-
-
-* Distancia 
-
-- Escribe un programa que calcule la distancia entre dos puntos del plano utilizando vectores de dimensión 2 para codificar los puntos. 
-
-#+BEGIN_SRC C 
-#include <stdio.h>
-#include <math.h>
-
-int main()
-{
-  float p1[2], p2[2];
-  float d;
-        
-  printf("Primer punto\n");
-  scanf("%f %f", &p1[0], &p1[1]);
-        
-  printf("Segundo punto\n");
-  scanf("%f %f", &p2[0], &p2[1]);
-
-  d = sqrt(pow(p1[0] - p2[0], 2) + pow(p1[1] - p2[1], 2));
-  
-  printf("La distancia entre los puntos es %f\n", d);
-
-  return 0;
-}
-
-#+END_SRC
-
-
-* Números primos
-
-Realiza un programa que calcule los números primos comprendidos entre el 1 y el 300 y los almacene en un vector.  
-
-Cuando se complete el cálculo el programa debe mostrar el contenido del vector. 
-
-#+BEGIN_SRC C 
-#include <stdio.h>
-
-#define N 300
-
-int main()
-{
-  int p;   // Numero a comprobar
-  int i;   // Indice de bucles
-  int ind_primo = 2;       // Indice del vector primos, que indica la primera posicion libre
-  int primos[N] = {2, 3};  // Vector de primos, inicializo los dos primeros, y el resto quedan a 0
-    
-  int esPrimo; // Booleano para indicar si es primo o no
-
-  // Empiezo comprobando desde el 5
-  for (p = 5; p <= N; p++) 
-  { 
-    // Inicialmente es primo
-    esPrimo = 1;
-    i = 0;
-    // Con while comprobamos el resto de la division del numero p
-    // con todos los primos anteriores
-    while(esPrimo && i < ind_primo)
-    {
-      // Si alguno de los restos es cero
-  	  if (p % primos[i] == 0)
-      {
-	      // el numero p deja de ser primo, y salgo del while
-  	    esPrimo = 0;
-      }
-	    // En caso contrario sigo avanzando
-  	  i++;
-  	}
-    // Si salgo del bucle sin haber encontrado un resto igual a
-    // cero, esPrimo sigue valiendo 1, lo que indica que se mantiene
-    // la condicion de ser primo
-    if (esPrimo)
-    { 
-      // y por tanto debo almacenar ese numero en el vector
-	    primos[ind_primo] = p;
-	    //y avanzar el indice del vector
-	    ind_primo = ind_primo + 1;
-    }
-  }
-  // Muestro el resultado en pantalla
-  for (i = 0; i < ind_primo; i++)
-  {
-    printf ("%i ", primos[i]);
-  }
-    
-  printf ("\n");
-  return 0;
-}
-#+END_SRC
-
-
-* Máximo, mínimo y promedio de una colección de números
-Escribe un programa que calcule y muestre en pantalla el máximo, mínimo y promedio de una colección de 10 valores de tipo entero que se introducen por teclado. 
-
-#+BEGIN_SRC C 
-#include <stdio.h>
-
-#define N 10
-
-int main()
-{
-
-  int vector[N], i;
-  int min, max;
-  float media;
-
-  printf("Escribe %d números enteros.\n", N);
-  // Rellena los valores del vector
-  for (i = 0; i < N; i++)
-  {
-    scanf("%i", &vector[i]);
-  }
-    
-  // Máximo
-  max = vector[0];  // Inicialmente, consideramos que el maximo inicial es el primer elemento
-  // Se busca en el vector si algún valor es mayor
-  for (i = 1; i < N; i++)
-  {
-    if (vector[i] > max)
-    {
-      // y se sustituye el valo de max si lo encuentra
-      max = vector[i]; 
-    } 
-  }
-
-  // Mínimo
-  min = vector[0];  // Inicialmente, consideramos que el minimo inicial es el primer elemento
-  for (i = 1; i < N; i++)
-  {
-    if (vector[i] < min) 
-    {
-      min = vector[i];
-    }
-  }
-
-  // Promedio
-  media = 0.0;
-  for (i = 0; i < N; i++)
-  {
-    media = media + vector[i];
-  }
-  media =  media / N;
-
-  printf("El máximo es %d, el mínimo es %d, y el promedio es %02f.\n", max, min, media);
-
-  return 0;
-}
-#+END_SRC
 
 * Ordenamiento de vectores
-
-- Escribe un programa que ordene de menor a mayor los elementos de un vector de 5 elementos. Los valores del vector serán introducidos por teclado, y el vector ordenado será mostrado por pantalla. 
+Escribe un programa que ordene de menor a mayor los elementos de un vector de 5 elementos. Los valores del vector serán introducidos por teclado, y el vector ordenado será mostrado por pantalla. 
 
 #+BEGIN_SRC C 
 #include <stdio.h>
@@ -270,3 +321,107 @@ int main()
 #+RESULTS:
 : Vector: 1 12 23 45 50
 
+
+* Números pares e impares
+Escriba un programa que almacene en un vector una cantidad n de números pares y en otro vector una cantidad m de números impares ingresados por el usuario. Genere un tercer vector con todos los números contenidos en los dos vectores iniciales y muestre este tercer vector como resultado.
+
+#+BEGIN_SRC C 
+#include <stdio.h>
+
+#define N 3  // Numero de pares
+#define M 4  // Numero de impares
+
+int main ()
+{
+  int pares[N] = {0};
+  int impares[M] = {0};
+  // Usamos esta variable para leer los numeros
+  // y luego los colocaremos en el vector correspondiente hasta que se llene
+  int leer_num;
+  // Utilizaremos estas variables para llevar la cuenta de los datos de cada vector
+  int num_par = 0;
+  int num_impar = 0;
+  
+  do
+  {
+    printf("Ingrese numeros pares e impares hasta llenar los vectores: \n" );
+    scanf( "%i", &leer_num);
+    if( leer_num%2 == 0)
+    {
+      if( num_par < N )
+      {
+        pares[num_par] = leer_num;
+        num_par  = num_par + 1;
+      }
+      else
+      {
+        printf("Ha terminado de llenar el vector de pares.\n" );
+      }
+    }
+    else
+    {
+      if( num_impar < M )
+      {
+        impares[num_impar] = leer_num;
+        num_impar  = num_impar + 1;
+      }
+      else
+      {
+        printf("Ha terminado de llenar el vector de impares.\n" );
+      }
+    }
+  // continuamos pidiendo números hasta que se llenan ambos vectores     
+  }while( (num_par < N) || (num_impar < M));
+  
+  int total[N+M] = {0};
+  int i;
+  
+  // buscamos el maximo de los 2 tamaños de vector
+  int max = N;
+  if(M>N)
+  {
+    max = M;
+  }
+  
+  int indice_vector = 0;
+  // Los intercalamos empezando por los pares
+  for(i = 0; i < max; i++)
+  {
+    // Aseguramos que i es menor que el tamaño del vector de pares
+    if(i<N)
+    {
+      total[indice_vector] = pares[i];
+      indice_vector = indice_vector + 1;  
+    }
+    // Aseguramos que i es menor que el tamaño del vector de impares
+    if(i<M)
+    {
+      total[indice_vector] = impares[i];
+      indice_vector = indice_vector + 1;  
+    }
+  }
+
+  // Se imprimen los numeros pares
+  printf( "Pares \n ");
+  for (i = 0; i < N; i++)
+  {
+    printf( "%i  ", pares[i]);
+  }
+
+  // Se imprimen los numeros impares
+  printf( "\nImpares \n ");
+  for (i = 0; i < M; i++)
+  {
+    printf( "%i  ", impares[i]);
+  }
+
+  // Se imprime el vector completo
+  printf( "\nTotal \n ");
+  for (i = 0; i < N+M; i++)
+  {
+    printf( "%i  ", total[i]);
+  }
+  
+  return 0;
+}
+#+END_SRC
