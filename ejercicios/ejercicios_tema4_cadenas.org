@@ -237,14 +237,131 @@ int main()
 
 Realice sus propios programas para suplir a las funciones: strlen(), strcpy(), strcat(), strcmp().
 
+  * strlen()
 #+BEGIN_SRC C 
+#include <stdio.h>
+#include <string.h>
 
+int main()
+{
+  char cadena[] = "nombre.apellidos@upm.es";
+
+  int contador = 0;
+  while (cadena[contador] != '\0') 
+  {
+    contador++;
+  }
+  
+  printf("El tamanho de la cadena es %i caracteres\n", contador);
+  printf("El tamanho de la cadena es %i caracteres", strlen(cadena));
+
+  return 0;
+}
 #+END_SRC
 
+  * strcpy()
+#+BEGIN_SRC C 
+#include <stdio.h>
+#include <string.h>
+
+int main()
+{
+  char cadena[] = "david";
+  char copia1[10];
+  char copia2[10];
+
+  int contador = 0;
+  // Se copian todos los caracteres
+  while (cadena[contador] != '\0') 
+  {
+    copia1[contador] = cadena[contador];
+    contador++;
+  }
+  // Al final se anhade el caracter terminador de la cadena
+  copia1[contador+1] = '\0';
+  printf("Esta es la cadena copiada manualmente: %s \n", copia1);
+  strcpy(copia2, cadena);
+  printf("Esta es la cadena copiada con strcpy: %s \n", copia2);
+
+  return 0;
+}
+#+END_SRC
+
+  * strcat()
+#+BEGIN_SRC C 
+#include <stdio.h>
+#include <string.h>
+
+int main()
+{
+  char cadena1[] = "david";
+  char cadena2[] = " alvarez";
+  char cadenas_juntas[20];
+
+  int contador1 = 0;
+  // Se copian todos los caracteres de la primera cadena
+  while (cadena1[contador1] != '\0') 
+  {
+    cadenas_juntas[contador1] = cadena1[contador1];
+    contador1++;
+  }
+  int contador2 = 0;
+  while (cadena2[contador2] != '\0') 
+  {
+    cadenas_juntas[contador1] = cadena2[contador2];
+    contador1++;
+    contador2++;
+  }  
+  // Al final se anhade el caracter terminador de la cadena
+  cadenas_juntas[contador1+1] = '\0';
+  printf("Esta es la cadena junta: %s \n", cadenas_juntas);
+  printf("Esta es la cadena junta: %s \n", strcat(cadena1, cadena2));
+
+  return 0;
+}
+#+END_SRC
+
+  * strcmp()
+#+BEGIN_SRC C 
+#include <stdio.h>
+#include <string.h>
+
+int main()
+{
+  char cadena1[] = "david";
+  char cadena2[] = "david";
+
+  int contador = 0;
+  while ((cadena1[contador] == cadena2[contador]) && (cadena1[contador] != '\0')) 
+  {
+    contador++;
+  }
+  int result;
+  if( cadena1[contador] == '\0')
+  {
+    result = 0;
+  }
+  else
+  {
+    if( (cadena1[contador] - cadena2[contador]) < 0)
+    {
+      result = -1;
+    }
+    else
+    {
+      result = 1;
+    }
+  }
+  printf("Resultado comparacion: %i \n", result);
+  printf("Resultado comparacion: %i \n", strcmp(cadena1, cadena2));
+
+  return 0;
+}
+#+END_SRC
 
 * Cuenta letras
 
-- Escribe un programa que analice la frase del ejercicio anterior contando en número de veces que aparece cada vocal. Al final del programa, se debe pintar en el terminal, para cada letra, una línea que contiene el mismo númeor de asteríscos que veces aparece esa vocal.
+Escribe un programa que analice la frase del ejercicio anterior contando en número de veces que aparece cada vocal. Al final del programa, se debe pintar en el terminal, para cada letra, una línea que contiene el mismo númeor de asteríscos que veces aparece esa vocal.
 
 #+begin_src C 
 #include <stdio.h>
