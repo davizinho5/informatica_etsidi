@@ -6,43 +6,10 @@
 #+PROPERTY: header-args :exports none
 #+EXPORT_FILE_NAME: ejercicios_tema4_cadenas.pdf
 
-* Palabra al revés
-
-Escribe un programa que imprima al revés una palabra introducida por teclado. (ejemplo: =casa= se convierte en =asac=).
-
-#+BEGIN_SRC C 
-#include <stdio.h>
-
-int main ()
-{
-  char palabra[12];
-  int len, i;
-  // Pide la palabra al usuario
-  printf("Escribe una palabra (máximo 11 letras):\n");
-  scanf("%11s", palabra);
-  
-  // Calcula la longitud de la cadena
-  i = 0;
-	while (palabra[i] != '\0')
-	{
-		i++;
-	}
-  len = i;
-  
-  // Empezamos por el último caracter (len - 1) y retrocedemos hasta
-  // el primero (0)
-  for(i = len-1; i >= 0; i--)
-  {
-    printf("%c", palabra[i]);
-  }
-    
-  return 0;
-}
-#+END_SRC
 
 * Espacios por guiones
 
-Escribe	un programa que cambie los espacios en blanco por un guión bajo =_= en la frase siguiente:
+Escribe  un programa que cambie los espacios en blanco por un guión bajo =_= en la frase siguiente:
 
 #+begin_src C  :exports code
 //Usamos \ para escribir varias lineas
@@ -66,9 +33,11 @@ Escribe	un programa que cambie los espacios en blanco por un guión bajo =_= en 
 #+BEGIN_SRC C 
 #include <stdio.h>
 
+// NOTA: se recomienda usar una frase más sencilla para empezar a probar el código
+
 int main()
 {
-   //Asignamos el texto a una variable char, sin definir la dimension
+  //Asignamos el texto a una variable char, sin definir la dimension
   //Usamos \ para escribir varias lineas
   char texto[] = 
 "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras euismod\
@@ -104,6 +73,174 @@ int main()
 
 #+RESULTS:
 | Lorem_ipsum_dolor_sit_amet | _consectetur_adipiscing_elit._Cras_euismod_orci_ac_porttitor_finibus._Curabitur_sed_tincidunt_est | _nec_mollis_lorem._Vestibulum_facilisis_dolor_sit_amet_faucibus_ultrices._Sed_pharetra_vel_erat_et_ornare._Duis_eu_lorem_non_leo_dictum_egestas._Integer_diam_arcu | _volutpat_ut_elit_vitae | _finibus_molestie_risus._Vivamus_sagittis_commodo_risus_vel_finibus._Vestibulum_vehicula_tortor_ut_ante_tincidunt | _non_tincidunt_turpis_sodales._Nam_orci_diam | _pulvinar_in_ante_a | _dignissim_pulvinar_magna._Mauris_massa_tortor | _fermentum_pretium_lobortis_sed | _luctus_vitae_tortor._Suspendisse_sagittis_augue_sit_amet_risus_molestie | _sed_dapibus_enim_vulputate._Sed_tempus_risus_vel_dolor_ornare | _eget_imperdiet_ligula_aliquam._Mauris_ac_auctor_lacus._Quisque_suscipit_interdum_rutrum._Sed_placerat_sit_amet_urna_in_vulputate._Nulla_facilisis_mi_nisi | _vel_pulvinar_odio_auctor_posuere. |
+
+
+
+* Letras al revés
+
+Escribe un programa que imprima al revés una palabra o frase introducida por teclado. (ejemplo: casa roja se convierte en (ajor asac).
+
+#+BEGIN_SRC C 
+#include <stdio.h>
+
+int main ()
+{
+  char palabra[12];
+  int len, i;
+  // Pide la palabra al usuario
+  printf("Escribe una palabra o frase (máximo 11 letras):\n");
+  scanf("%11[^\n]", palabra);
+  
+  // Calcula la longitud de la cadena
+  i = 0;
+  while (palabra[i] != '\0')
+  {
+    i++;
+  }
+  len = i;
+  
+  // Empezamos por el último caracter (len - 1) y retrocedemos hasta
+  // el primero (0)
+  for(i = len-1; i >= 0; i--)
+  {
+    printf("%c", palabra[i]);
+  }
+    
+  return 0;
+}
+#+END_SRC
+
+
+* Palabra al revés
+
+Escribe un programa que imprima al revés una palabra introducida por teclado. (ejemplo: =casa= se convierte en =asac=).
+
+#+BEGIN_SRC C 
+#include <stdio.h>
+
+int main ()
+{
+  char frase[31];
+  int len, i;
+  // Pide la frase al usuario
+  printf("Escribe una frase (máximo 30 letras):\n");
+  gets(frase);
+  
+  // Calcula la longitud de la cadena
+  i = 0;
+  while (frase[i] != '\0')
+  {
+    i++;
+  }
+  len = i;
+  
+  // Usamos estas variables para marcar el inicio y fin de una frase
+  int fin = len-1;
+  int inicio;
+  // Empezamos por el último caracter (len - 1) y retrocedemos hasta
+  // el primero (0)
+  for(i = len-1; i >= 0; i--)
+  {
+    // En cada espacio hay una nueva palabra. 
+    // Asumimos que no hay puntos ni comas (esto podría mejorarse)
+    if(( frase[i] == ' ') || (i==0) )
+    {
+      if ( frase[i] == ' ')
+      {
+        inicio = i+1;
+      }
+      else
+      {
+        inicio = i;  
+      }
+      // Imprimimos hasta el final de la palabra
+      while(inicio <= fin)
+      {
+        printf("%c", frase[inicio]);
+        inicio++;
+      }
+      // Asignamos el nuevo fin
+      fin = i-1;
+      printf(" ");
+    }
+    
+  }
+    
+  return 0;
+}
+#+END_SRC
+
+
+* Gira palabras
+
+Escribe un programa que procese la frase del ejercicio 1. Como resultado, cada palabra de la frase debe de escribrila al revés.
+
+#+BEGIN_SRC C 
+#include <stdio.h>
+
+// NOTA: se recomienda usar una frase más sencilla para empezar a probar el código
+
+int main()
+{
+  //Asignamos el texto a una variable char, sin definir la dimension
+  //Usamos \ para escribir varias lineas
+  char texto[] = 
+"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras euismod\
+ orci ac porttitor finibus. Curabitur sed tincidunt est, nec mollis\
+ lorem. Vestibulum facilisis dolor sit amet faucibus ultrices. Sed\
+ pharetra vel erat et ornare. Duis eu lorem non leo dictum\
+ egestas. Integer diam arcu, volutpat ut elit vitae, finibus molestie\
+ risus. Vivamus sagittis commodo risus vel finibus. Vestibulum\
+ vehicula tortor ut ante tincidunt, non tincidunt turpis sodales. Nam\
+ orci diam, pulvinar in ante a, dignissim pulvinar magna. Mauris massa\
+ tortor, fermentum pretium lobortis sed, luctus vitae\
+ tortor. Suspendisse sagittis augue sit amet risus molestie, sed\
+ dapibus enim vulputate. Sed tempus risus vel dolor ornare, eget\
+ imperdiet ligula aliquam. Mauris ac auctor lacus. Quisque suscipit\
+ interdum rutrum. Sed placerat sit amet urna in vulputate. Nulla\
+ facilisis mi nisi, vel pulvinar odio auctor posuere.";
+
+  // usaremos estas variables para marcar el inicio y el fin de una palabra
+  int fin;
+  int inicio=0;
+  int i = 0;
+  //Recorremos el texto hasta el final
+  while(texto[i] != '\0')
+  {
+    if(texto[i] == ' ') //Si encuentra un espacio
+    {
+      // vamos de fin a inicio para imprimir al reves
+      fin = i-1;
+      while(fin >= inicio)
+      {
+        printf("%c", texto[fin]); //Imprime cada letra
+        fin--;
+      }
+      printf(" ");
+      inicio = i+1;
+    }
+    i++;
+  }
+  fin = i-1;
+  while(fin >= inicio)
+  {
+    printf("%c", texto[fin]); //Imprime cada letra
+    fin--;
+  }
+  
+  return 0;    
+}
+#+END_SRC
+
+
+* Sustituir string.h
+
+Realice sus propios programas para suplir a las funciones: strlen(), strcpy(), strcat(), strcmp().
+
+#+BEGIN_SRC C 
+
+#+END_SRC
+
 
 * Cuenta letras
 
@@ -154,12 +291,12 @@ int main()
       case 'I':
         nLetra[2]++;
       break;
-	
+  
       case 'o':
       case 'O':
         nLetra[3]++;
       break;
-	
+  
       case 'u':
       case 'U':
         nLetra[4]++;
@@ -190,3 +327,79 @@ int main()
 | i: | ************************************************************************************* |
 | o: | *****************************************                                             |
 | u: | ****************************************************************                      |
+
+
+* Separa palabras
+
+Escribe un programa que pida al usuario introducir una frase de varias palabras. Pida una nueva frase si ha introducido una sola palabra. Depués. imprima cada palabra en una nueva línea.
+
+#+BEGIN_SRC C 
+
+#+END_SRC
+
+
+* Convertir letras
+
+Escribe un programa que después de introducir una palabra convierta alternativamente las letras a mayúsculas y minúsculas y viceversa.
+
+#+BEGIN_SRC C 
+
+#+END_SRC
+
+
+* Buscar nombre
+
+Construya un programa que almacene en un vector los nombres de un grupo de n personas y que, a continuación, busque la posición del vector en la que se almacenó el nombre de una persona que el usuario ingresa. Si dicho nombre no está en el vector, el programa deberá informarlo.
+
+#+BEGIN_SRC C 
+
+#+END_SRC
+
+
+* Mover letras en palabra
+
+Introduzca una palabra por teclado. Realice un programa que permita llevar la última letra al inicio. Repítalo hasta recomponer nuevamente la palabra ingresada. (ejemplo: casa -> acas -> saca -> asac -> casa).
+
+#+BEGIN_SRC C 
+
+#+END_SRC
+
+
+* Encriptar texto
+
+En este ejercicio debes realizar un programa que encripte una cadena de caracteres empleando un número entero como clave de encriptación. En este programa el contenido de la cadena será tu correo electrónico de la UPM, y la clave se determinará a partir de tu número de matrícula. Todos los valores deben estar asignados dentro del código (no uses scanf o gets).
+Debes calcular la suma de las cifras de tu número de matrícula. Si tu número de matrícula es impar, el programa debe asignar un signo negativo al resultado. Por ejemplo, si tu número de matrícula es 12345 el resultado de este paso debe ser -15, y si es 43210 el resultado es 10. Éste valor será la clave de encriptación.
+Además, define una cadena de caracteres y asígnale tu correo electrónico de la UPM, crea otra cadena para encriptar el correo. El programa recorre la cadena de caracteres sumando a cada carácter la clave de encriptación (con su signo) salvo a los puntos y a la @, que serán copiados sin cambios.
+Para finalizar, el programa debe mostrar en pantalla el correo original y el correo encriptado.
+
+#+BEGIN_SRC C 
+#include <stdio.h>
+int main()
+{
+  char correo[] = "nombre.apellidos@upm.es", encriptado[] = "nombre.apellidos@upm.es";
+  int matricula = 12345, x, y, suma = 0, i;
+  x = matricula;
+  while(x > 0)
+  {
+    y = x % 10;
+    suma += y;
+    x /= 10;
+  }
+  if (matricula % 2 != 0)
+    suma = - suma;
+  i = 0;
+  while (correo[i] != '\0')
+  {
+    if( (correo[i] != '.') && (correo[i] != '@') )
+      encriptado[i] = correo[i] + suma;
+    else
+      encriptado[i] = correo[i];
+    i++;
+  }
+  encripta[i] = '\0';
+  printf("El correo original es %s y el encriptado es %s.\n", correo, encriptado);
+
+  return 0;
+}
+#+END_SRC
+
