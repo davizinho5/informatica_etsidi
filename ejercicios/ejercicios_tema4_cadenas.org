@@ -448,28 +448,185 @@ int main()
 
 * Separa palabras
 
-Escribe un programa que pida al usuario introducir una frase de varias palabras. Pida una nueva frase si ha introducido una sola palabra. Depués. imprima cada palabra en una nueva línea.
+Escribe un programa que pida al usuario introducir una frase de varias palabras. Pida una nueva frase si ha introducido una sola palabra. Después, imprima cada palabra en una nueva línea.
 
 #+BEGIN_SRC C 
+#include <stdio.h>
 
+int main() 
+{
+    char frase[256];
+    int i, masdeunapalabra = 0;  // Cero significa que que no hay espacios, comas o puntos, luego es solo una palabra
+
+    // Solicitar frase al usuario
+    do 
+    {
+        printf("Introduce una frase de varias palabras hasta 255 caracteres: ");
+        gets(frase);            // Leer la línea completa, incluyendo espacios
+
+        // Verificar si la frase contiene al menos un espacio, indicando múltiples palabras
+        i = 0;
+        while(frase[i] != '\0') 
+        {  
+            // Las palabras pueden separarse por espacios, comas o puntos.
+            if ( (frase[i] == ' ') || (frase[i] == ',') || (frase[i] == '.') ) 
+            {
+                masdeunapalabra = 1; // Se encontró un espacio
+                // break;            // Si aquí usamos break podemos ahorrar algunas iteraciones
+            }
+            i++;
+        }
+    
+        // Si no hay más de una palaba, sumimos que separada por espacio, coma o punto
+        if (masdeunapalabra == 0) 
+        {
+            printf("Por favor, introduce más de una palabra.\n");
+        }
+
+    } while (masdeunapalabra == 0); // Repetir mientras no haya separadores (solo una palabra)
+
+    // Imprimir cada palabra en una nueva línea
+    printf("Palabras ingresadas:\n");
+    i = 0;
+    while ( frase[i] != '\0' ) 
+    {
+        // Si encontramos un espacio, coma o punto cambiamos de linea
+        if ((frase[i] == ' ') || (frase[i] == ',') || (frase[i] == '.')) 
+        { 
+            printf("\n"); // Imprimir nueva línea para la siguiente palabra
+        } else 
+        {
+            printf("%c", frase[i]); // Imprimir caracter actual
+        }
+        i++;
+    }
+
+    return 0;
+}
 #+END_SRC
 
 
 * Convertir letras
 
-Escribe un programa que después de introducir una palabra convierta alternativamente las letras a mayúsculas y minúsculas y viceversa.
+Escribe un programa que después de introducir una palabra convierta una de cada 2 letras, de mayúsculas a minúsculas, o viceversa. Siga pidiendo palabras hasta que se introduzca el caractrer 0 para terminar el programa. 
 
 #+BEGIN_SRC C 
+#include <stdio.h>
 
+int main() 
+{
+  char palabra[25]; // Vector para almacenar la palabra ingresada.
+  int i;
+
+  printf("Introduce una palabra (o 0 para terminar): ");
+  // Leer una palabra hasta 4 letras
+  scanf("%24s", palabra);
+      
+  while (palabra[0] != '0') 
+  {
+    // Convertir y alternar mayúsculas/minúsculas para cada letra.
+    i = 0;
+    while ( palabra[i] != '\0' ) 
+    {
+      // Cambiamos solo los caracteres en posiciones pares
+      if (i % 2 == 0) 
+      {
+        // Convertir a mayúscula si es minúscula.
+        if (palabra[i] >= 'a' && palabra[i] <= 'z') 
+        {
+          palabra[i] = palabra[i] - ('a' - 'A');
+        }
+        // Convertir a minúscula si es mayúscula.
+        else 
+        {
+          if (palabra[i] >= 'A' && palabra[i] <= 'Z') 
+          {
+            palabra[i] = palabra[i] + ('a' - 'A');
+          }
+        }
+      }
+      i++;
+    }
+
+    printf("Resultado: %s\n\n", palabra);
+    
+    printf("Introduce una palabra (o 0 para terminar): ");
+    // Leer una palabra hasta 4 letras
+    scanf("%24s", palabra);
+  }
+
+  printf("Programa terminado.\n");
+  return 0;
+}
 #+END_SRC
 
 
 * Buscar nombre
 
-Construya un programa que almacene en un vector los nombres de un grupo de n personas y que, a continuación, busque la posición del vector en la que se almacenó el nombre de una persona que el usuario ingresa. Si dicho nombre no está en el vector, el programa deberá informarlo.
+Construya un programa que almacene en un vector los nombres de un grupo de n personas y que, a continuación, busque la posición (primer nombre, segundo nombre...) del vector en la que se almacenó el nombre de una persona que el usuario ingresa y comuniquelo. Si dicho nombre no está en el vector, el programa deberá informarlo. Separe los nombres del vector con comas. 
 
 #+BEGIN_SRC C 
+#include <stdio.h>
 
+#define MAX_NOMBRE 10
+
+int main() 
+{
+  char nombres[] = "david,maria,jorge,manuela";
+  int i,j, posicion, encontrado;
+  char nombreBuscado[MAX_NOMBRE];
+
+  // Pedir al usuario el nombre a buscar
+  printf("Ingrese el nombre de la persona a buscar: ");
+  scanf("%19s", nombreBuscado);
+    
+  // Buscar el nombre en la cadena
+  encontrado = 0;
+  posicion = 0; // Posición inicial del nombre en la lista
+  i = 0;
+  while (nombres[i] != '\0') 
+  {
+    posicion++;
+    // usamos i para comprobar el vector de nombres
+    // usamos j para comprobar el nombre
+    // si el nombre es el último, encontraríamos el caracter \0
+    j = 0;
+    while( (nombreBuscado[j] == nombres[i]) && (nombreBuscado[j] != '\0')) 
+    {
+      j++;
+      i++;
+    }
+    // Al acabar, comprobamos por qué hemos salido del bucle
+    // Si hemos llegado al final del nombre, es que lo hemos encontrado
+    if (nombreBuscado[j] == '\0') 
+    {
+      encontrado = 1;
+      printf("El nombre '%s' se encontro en la posicion %i de la lista.\n", nombreBuscado, posicion);
+      i++;
+    }
+    // cualquier otra razón, los nombres no son iguales
+    else
+    {
+      // avanzamos hasta la sigueinte coma o el final del vector
+      while( (nombres[i] != ',') && (nombres[i] != '\0') ) 
+      {
+        i++;
+      }
+      // avazamos uno más para dejar atrás la coma
+      if(nombres[i] == ',')
+      {
+        i++;  
+      }
+    }
+  }
+
+  if (encontrado == 0) 
+  {
+    printf("El nombre '%s' no se encontró en la lista.\n", nombreBuscado);
+  }
+
+  return 0;
+}
 #+END_SRC
 
 
@@ -478,7 +635,53 @@ Construya un programa que almacene en un vector los nombres de un grupo de n per
 Introduzca una palabra por teclado. Realice un programa que permita llevar la última letra al inicio. Repítalo hasta recomponer nuevamente la palabra ingresada. (ejemplo: casa -> acas -> saca -> asac -> casa).
 
 #+BEGIN_SRC C 
+#include <stdio.h>
 
+#define MAX_LONGITUD 20
+
+int main() {
+    char palabra[MAX_LONGITUD], palabraModificada[MAX_LONGITUD], temp;
+    int longitud, i, ciclos = 0;
+
+    printf("Introduzca una palabra: ");
+    scanf("%s", palabra);
+
+    // Calcular la longitud de la palabra
+    longitud = 0;
+    while (palabra[longitud] != '\0')
+    {
+      longitud++;
+    }    
+    // Copiar la palabra original a palabraModificada para trabajar sobre ella
+    for (i = 0; i <= longitud; i++)
+    {
+      palabraModificada[i] = palabra[i];
+    }
+    
+    do 
+    {
+        // Mover la última letra al inicio
+        // Primero se hace una copia de la última letra para no perderla
+        temp = palabraModificada[longitud - 1];
+        // Se mueven el resto de letras una posición
+        for (i = longitud - 1; i > 0; i--) 
+        {
+            palabraModificada[i] = palabraModificada[i - 1];
+        }
+        // Y se copia la letra guardada al principio en su posición
+        palabraModificada[0] = temp;
+
+        // Incrementar el contador de ciclos
+        ciclos++;
+        printf("Ciclo %i: %s\n", ciclos, palabraModificada);
+
+        // Continuar hasta que la palabra modificada sea igual a la original
+    } while (ciclos < longitud);
+
+    printf("La palabra '%s' fue recompuesta después de %i ciclos.\n", palabra, ciclos);
+
+    return 0;
+}
 #+END_SRC
 
 
