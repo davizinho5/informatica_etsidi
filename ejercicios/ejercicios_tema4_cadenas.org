@@ -7,7 +7,7 @@
 #+EXPORT_FILE_NAME: ejercicios_tema4_cadenas.pdf
 
 
-* Espacios por guiones
+* 1. Espacios por guiones
 
 Escribe  un programa que cambie los espacios en blanco por un guión bajo =_= en la frase siguiente:
 
@@ -76,7 +76,7 @@ int main()
 
 
 
-* Letras al revés
+* 2. Letras al revés
 
 Escribe un programa que imprima al revés una palabra o frase introducida por teclado. (ejemplo: casa roja se convierte en (ajor asac).
 
@@ -111,7 +111,7 @@ int main ()
 #+END_SRC
 
 
-* Palabra al revés
+* 3. Palabra al revés
 
 Escribe un programa que imprima al revés una palabra introducida por teclado. (ejemplo: =casa= se convierte en =asac=).
 
@@ -171,7 +171,7 @@ int main ()
 #+END_SRC
 
 
-* Gira palabras
+* 4. Gira palabras
 
 Escribe un programa que procese la frase del ejercicio 1. Como resultado, cada palabra de la frase debe de escribrila al revés.
 
@@ -233,11 +233,11 @@ int main()
 #+END_SRC
 
 
-* Sustituir string.h
+* 5. Sustituir string.h
 
 Realice sus propios programas para suplir a las funciones: strlen(), strcpy(), strcat(), strcmp().
 
-  * strlen()
+  * a. strlen()
 #+BEGIN_SRC C 
 #include <stdio.h>
 #include <string.h>
@@ -259,7 +259,7 @@ int main()
 }
 #+END_SRC
 
-  * strcpy()
+  * b. strcpy()
 #+BEGIN_SRC C 
 #include <stdio.h>
 #include <string.h>
@@ -287,7 +287,7 @@ int main()
 }
 #+END_SRC
 
-  * strcat()
+  * c. strcat()
 #+BEGIN_SRC C 
 #include <stdio.h>
 #include <string.h>
@@ -321,7 +321,7 @@ int main()
 }
 #+END_SRC
 
-  * strcmp()
+  * d. strcmp()
 #+BEGIN_SRC C 
 #include <stdio.h>
 #include <string.h>
@@ -359,7 +359,7 @@ int main()
 }
 #+END_SRC
 
-* Cuenta letras
+* 6. Cuenta letras
 
 Escribe un programa que analice la frase del ejercicio anterior contando en número de veces que aparece cada vocal. Al final del programa, se debe pintar en el terminal, para cada letra, una línea que contiene el mismo númeor de asteríscos que veces aparece esa vocal.
 
@@ -446,7 +446,7 @@ int main()
 | u: | ****************************************************************                      |
 
 
-* Separa palabras
+* 7. Separa palabras
 
 Escribe un programa que pida al usuario introducir una frase de varias palabras. Pida una nueva frase si ha introducido una sola palabra. Después, imprima cada palabra en una nueva línea.
 
@@ -506,7 +506,7 @@ int main()
 #+END_SRC
 
 
-* Convertir letras
+* 8. Convertir letras
 
 Escribe un programa que después de introducir una palabra convierta una de cada 2 letras, de mayúsculas a minúsculas, o viceversa. Siga pidiendo palabras hasta que se introduzca el caractrer 0 para terminar el programa. 
 
@@ -561,7 +561,7 @@ int main()
 #+END_SRC
 
 
-* Buscar nombre
+* 9. Buscar nombre
 
 Construya un programa que almacene en un vector los nombres de un grupo de n personas y que, a continuación, busque la posición (primer nombre, segundo nombre...) del vector en la que se almacenó el nombre de una persona que el usuario ingresa y comuniquelo. Si dicho nombre no está en el vector, el programa deberá informarlo. Separe los nombres del vector con comas. 
 
@@ -630,7 +630,7 @@ int main()
 #+END_SRC
 
 
-* Mover letras en palabra
+* 10. Mover letras en palabra
 
 Introduzca una palabra por teclado. Realice un programa que permita llevar la última letra al inicio. Repítalo hasta recomponer nuevamente la palabra ingresada. (ejemplo: casa -> acas -> saca -> asac -> casa).
 
@@ -685,7 +685,7 @@ int main() {
 #+END_SRC
 
 
-* Encriptar texto
+* 11. Encriptar texto
 
 En este ejercicio debes realizar un programa que encripte una cadena de caracteres empleando un número entero como clave de encriptación. En este programa el contenido de la cadena será tu correo electrónico de la UPM, y la clave se determinará a partir de tu número de matrícula. Todos los valores deben estar asignados dentro del código (no uses scanf o gets).
 Debes calcular la suma de las cifras de tu número de matrícula. Si tu número de matrícula es impar, el programa debe asignar un signo negativo al resultado. Por ejemplo, si tu número de matrícula es 12345 el resultado de este paso debe ser -15, y si es 43210 el resultado es 10. Éste valor será la clave de encriptación.
