@@ -639,7 +639,8 @@ Introduzca una palabra por teclado. Realice un programa que permita llevar la ú
 
 #define MAX_LONGITUD 20
 
-int main() {
+int main() 
+{
     char palabra[MAX_LONGITUD], palabraModificada[MAX_LONGITUD], temp;
     int longitud, i, ciclos = 0;
 
