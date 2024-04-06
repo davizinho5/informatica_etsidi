@@ -676,7 +676,7 @@ int main()
         ciclos++;
         printf("Ciclo %i: %s\n", ciclos, palabraModificada);
 
-        // Continuar hasta que la palabra modificada sea igual a la original
+    // Continuar hasta que la palabra modificada sea igual a la original
     } while (ciclos < longitud);
 
     printf("La palabra '%s' fue recompuesta después de %i ciclos.\n", palabra, ciclos);
@@ -712,9 +712,13 @@ int main()
   while (correo[i] != '\0')
   {
     if( (correo[i] != '.') && (correo[i] != '@') )
+    {
       encriptado[i] = correo[i] + suma;
+    }
     else
+    {
       encriptado[i] = correo[i];
+    }
     i++;
   }
   encripta[i] = '\0';
