@@ -612,7 +612,7 @@ int main()
       {
         i++;
       }
-      // avazamos uno más para dejar atrás la coma
+      // si llegamos a una coma, avazamos uno más para dejar atrás la coma
       if(nombres[i] == ',')
       {
         i++;  
