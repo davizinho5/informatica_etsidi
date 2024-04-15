@@ -612,7 +612,7 @@ int main()
       {
         i++;
       }
-      // avazamos uno más para dejar atrás la coma
+      // si llegamos a una coma, avazamos uno más para dejar atrás la coma
       if(nombres[i] == ',')
       {
         i++;  
@@ -627,6 +627,71 @@ int main()
 
   return 0;
 }
+#+END_SRC
+
+  * Solución hecha en clase:
+#+BEGIN_SRC C
+#include <stdio.h>
+
+//Construya un programa que almacene en un vector los nombres de un grupo de n personas 
+// busque la posición (primer nombre, segundo nombre...) del vector en la que se almacenó
+// el nombre de una persona que el usuario ingresa y comuniquelo. 
+// Si dicho nombre no está en el vector, el programa deberá informarlo. 
+// Separe los nombres del vector con comas.
+
+int main()
+{
+  char nombres[] = "david,juan,maria,berta";
+  char nombre_usuario[10];
+  
+  printf("Introduzca un nombre para buscar en mi cadena: ");
+  scanf("%9s", nombre_usuario); 
+  
+  int i=0, j=0;
+  // usamos esta variable para contar cuantas lestras han sido iguales
+  int iguales = 0;
+  // debemos llevar cuenta de la posición de nombre que estamos 
+  // inicializamos en 1 porque es la primea posicion
+  int posicion = 1;
+  // recorre las cadenas hasta que una de ellas llegue al final
+  // Y si NO hemos encontrado el nombre
+  while( (nombres[i] != '\0') && (nombre_usuario[iguales] != '\0') )
+  {
+    // comparamos las posiciones 1 a 1
+    if(nombres[i] != nombre_usuario[j])
+    {
+       iguales = 0;
+       // Tengo que ir hasta la siguiente coma
+       //"david,juan,maria,berta";
+       while(nombres[i] != ',')
+       {
+           i++;
+       }  
+       // al ir al siguiente nombre, actualizamos el valor de posición
+         posicion++;
+         // Para que al hacer el j++ de la linea 48, empecemos la siguiente búsqueda en 0
+        j=-1;     
+    }
+    else
+    {
+      iguales++;
+    }
+
+    i++;  
+    j++;
+  }  
+  if(nombre_usuario[iguales] == '\0')
+  {
+    printf("Si lo he encontrado en la posicion %i.", posicion);
+  }
+  else
+  {
+    printf("No lo he encontrado");
+  }
+  
+  return 0;
+}
+
 #+END_SRC
 
 
