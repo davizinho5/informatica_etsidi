@@ -800,58 +800,58 @@ Solución basada en estructuras:
 // Declarar una estructura con los datos necesarios
 typedef struct
 {
-	char correo[50];
-	int num_matricula;
-	char correo_encriptado[50];
+  char correo[50];
+  int num_matricula;
+  char correo_encriptado[50];
 }mail_encriptado;
 
 int main () 
 {
-	// Declarar los datos del problema e inicializarlo
-	mail_encriptado alumno = {"nombre.apellidos@upm.es", 12345, " "};
-	
-	// Con el numero de matricula, calcular la clave
-	int clave = 0;
-	int copia_matricula = alumno.num_matricula;
-	// Separar los números
-	// Hacer la suma
-	while(copia_matricula > 0)
-	{
-		clave = clave + (copia_matricula%10);
-		copia_matricula = copia_matricula/10;
-	}
-	// Comprobar si impar
-	   // Si impar, cambiar de signo
+  // Declarar los datos del problema e inicializarlo
+  mail_encriptado alumno = {"nombre.apellidos@upm.es", 12345, " "};
+  
+  // Con el numero de matricula, calcular la clave
+  int clave = 0;
+  int copia_matricula = alumno.num_matricula;
+  // Separar los números
+  // Hacer la suma
+  while(copia_matricula > 0)
+  {
+    clave = clave + (copia_matricula%10);
+    copia_matricula = copia_matricula/10;
+  }
+  // Comprobar si impar
+     // Si impar, cambiar de signo
   if(alumno.num_matricula%2 != 0)
   {
-  	clave = (-1)*clave;
-	}
-	printf("Clave: %i\n", clave);
-	
-	//Con correo y clave, calcular la cadena encriptada
-	  // Recorrer la cadena
+    clave = (-1)*clave;
+  }
+  printf("Clave: %i\n", clave);
+  
+  //Con correo y clave, calcular la cadena encriptada
+    // Recorrer la cadena
   int i = 0;
   while(alumno.correo[i] != '\0')
   {
-  	// Detectar si tengo una letra
-  	if( (alumno.correo[i]>='a') && (alumno.correo[i]<='z') || (alumno.correo[i]>='A') && (alumno.correo[i]<='Z') )
-  	{
-  		//Si tengo letra,  Encripta
-  		alumno.correo_encriptado[i] = alumno.correo[i] + clave;
-		}
+    // Detectar si tengo una letra
+    if( (alumno.correo[i]>='a') && (alumno.correo[i]<='z') || (alumno.correo[i]>='A') && (alumno.correo[i]<='Z') )
+    {
+      //Si tengo letra,  Encripta
+      alumno.correo_encriptado[i] = alumno.correo[i] + clave;
+    }
     else
     {
-    	// Si no, se copia
-    	alumno.correo_encriptado[i] = alumno.correo[i];
-		}      
-  	i++;
-	}
-	// Terminador de la cadena
+      // Si no, se copia
+      alumno.correo_encriptado[i] = alumno.correo[i];
+    }      
+    i++;
+  }
+  // Terminador de la cadena
   alumno.correo_encriptado[i] = '\0';
   
   printf("Correo encriptado: %s", alumno.correo_encriptado);
 
-	return 0;
+  return 0;
 }
 #+END_SRC
 
