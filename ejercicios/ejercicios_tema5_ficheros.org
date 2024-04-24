@@ -7,7 +7,7 @@
 #+EXPORT_FILE_NAME: ejercicios_tema7.pdf
 
 * Copia de ficheros
-Escribe	un programa que copie el contenido de un fichero en otro cambiando los espacios en blanco por un guión bajo =_=. Emplea el fichero =lorem_ipsum.txt= como ejemplo. (Sugerencia: revisa el ejercicio "Espacios por guiones" del capítulo 4).
+Escribe  un programa que copie el contenido de un fichero en otro cambiando los espacios en blanco por un guión bajo =_=. Emplea el fichero =lorem_ipsum.txt= como ejemplo. (Sugerencia: revisa el ejercicio "Espacios por guiones" del capítulo 4).
 
 #+BEGIN_SRC C
 #include <stdio.h>
@@ -19,7 +19,8 @@ int main ()
   // Abre ficheros:
   // El origen en modo lectura:
   fOrigen = fopen("lorem_ipsum.txt", "r");
-  if (fOrigen == NULL) {
+  if (fOrigen == NULL) 
+  {
     printf("Error al abrir el archivo origen.\n");
     return -1;
   }
@@ -33,19 +34,20 @@ int main ()
       return -1;
     } 
     else 
-    { // Los dos ficheros están correctamente abiertos
-      // Leemos el origen caracter por caracter, parando al encontrar
-      // el EOF
-      while (fscanf(fOrigen, "%c", &c) != EOF)
-      {
-        if (c == ' ') c = '_'; // Cambiamos espacios por guiones
-        fprintf(fDestino, "%c", c); // Escribimos el caracter en el destino
-      }
-      // Cerramos ficheros
-      fclose(fOrigen);
-      fclose(fDestino);
-      printf("Copia finalizada con exito.\n");
-      return 0;
+    { 
+       // Los dos ficheros están correctamente abiertos
+       // Leemos el origen caracter por caracter, parando al encontrar
+       // el EOF
+       while (fscanf(fOrigen, "%c", &c) != EOF)
+       {
+         if (c == ' ') c = '_'; // Cambiamos espacios por guiones
+         fprintf(fDestino, "%c", c); // Escribimos el caracter en el destino
+       }
+       // Cerramos ficheros
+       fclose(fOrigen);
+       fclose(fDestino);
+       printf("Copia finalizada con exito.\n");
+       return 0;
     }
   }
 }
@@ -77,7 +79,8 @@ int main()
   {
     // Leemos carácter a carácter hasta encontrar EOF
     while (fscanf(pf, "%c", &c) != EOF)
-    {// En cada paso incrementamos el contador de caracteres 
+    {
+      // En cada paso incrementamos el contador de caracteres 
       iChar++;
       // El espacio y el salto de línea definen una nueva palabra,
       // luego incrementamos el contador de palabras
@@ -92,7 +95,7 @@ int main()
         }
       }
     }
-    printf("Caracteres: %d \t Palabras: %d \t Líneas: %d.\n", iChar, iWord, iLine);
+    printf("Caracteres: %i \t Palabras: %i \t Líneas: %i.\n", iChar, iWord, iLine);
 
     fclose(pf);
   }
@@ -101,8 +104,6 @@ int main()
 
 #+RESULTS:
 | Caracteres: 848 | Palabras: 146 | Líneas: 16. |
-
-
 
 
 * Cuenta letras
@@ -165,7 +166,7 @@ int main()
     {
       for (j = 1; j <= nVocales[i]; j++)
       {
-        printf("*");    		
+        printf("*");        
       }
     }
     printf("\n");
@@ -190,8 +191,6 @@ Escribe un programa que lea este fichero almacenando el contenido de cada column
 | Viento   | XX  | XX  | XX    |
 | Rad      | XX  | XX  | XX    |
 
-
-
 #+BEGIN_SRC C
 #include <stdio.h>
 #define N 2898
@@ -200,7 +199,7 @@ int main()
 {
   FILE *plectura;
   FILE *pescritura;
-  // Defino un vector para cada variable a leer del fichero	
+  // Defino un vector para cada variable a leer del fichero  
   float temp[N];
   float hum[N];
   float viento[N];
@@ -222,7 +221,7 @@ int main()
       fscanf(plectura, "%f,%f,%f,%f", &temp[i], &hum[i], &viento[i], &rad[i]); 
     }
     // Se ha terminado de leer, luego se cierra el archivo
-    fclose(plectura);	
+    fclose(plectura);  
 
     // Suponemos que el mínimo y máximo valores son el primero
     // Después iremos sustituyendo al encontrar un nuevo mínimo o máximo
@@ -245,52 +244,52 @@ int main()
       if(temp[i] > max_temp)
       {
         max_temp = temp[i];
-      }	  	
+      }      
       if(temp[i] < min_temp)
       {
-        min_temp = temp[i];				  		
+        min_temp = temp[i];              
       }
       mean_temp = mean_temp + temp[i];
-			
+      
       // Humedad
       if(hum[i] > max_hum)
       {
         max_hum = hum[i];
-      }	  	
+      }      
       if(hum[i] < min_hum)
       {
-        min_hum = hum[i];				  		
+        min_hum = hum[i];              
       }
-      mean_hum = mean_hum + hum[i];	  	
-		  
+      mean_hum = mean_hum + hum[i];      
+      
       // Viento
       if(viento[i] > max_viento)
       {
         max_viento = viento[i];
-      }	  	
+      }      
       if(viento[i] < min_viento)
       {
-        min_viento = viento[i];				  		
+        min_viento = viento[i];              
       }
       mean_viento = mean_viento + viento[i];
-			
+      
       // Radiación
       if(rad[i] > max_rad)
       {
         max_rad = rad[i];
-      }	  	
+      }      
       if(rad[i] < min_rad)
       {
-        min_rad = rad[i];				  		
+        min_rad = rad[i];              
       }
-      mean_rad = mean_rad + rad[i];				
+      mean_rad = mean_rad + rad[i];        
     }
     // Calculamos medias
     mean_temp = mean_temp/N;
     mean_hum = mean_hum/N;
     mean_viento = mean_viento/N;
     mean_rad = mean_rad/N;
-		
+    
     // Mostramos resultados
     printf("Variable: \t Min \t Max \t Prom \n");
     printf("Temperat: \t %f \t %f \t %f \n", min_temp, max_temp, mean_temp);
@@ -305,7 +304,7 @@ int main()
       printf("ERROR AL ABRIR EL FICHERO DE ESCRITURA");
     }
     else
-    {	
+    {  
       fprintf(pescritura, "Variable: \t Min \t Max \t Prom \n");
       fprintf(pescritura, "Temp: \t %f \t %f \t %f \n", min_temp, max_temp, mean_temp);
       fprintf(pescritura, "Humedad: \t %f \t %f \t %f \n",min_hum, max_hum, mean_hum);
@@ -313,11 +312,11 @@ int main()
       fprintf(pescritura, "Radiacion: \t %f \t %f \t %f \n", min_rad, max_rad, mean_rad);
 
       // Al terminar de escribir, cerramos el archivo
-      fclose(pescritura);	
-    }		
+      fclose(pescritura);  
+    }    
   }
-	
-  return 0;	
+  
+  return 0;  
 }
 #+END_SRC
 
@@ -327,4 +326,127 @@ int main()
 | Humedad:   |  19.89 | 100.0 |  62.16033 |
 | Viento:    |  0.251 |  8.26 |  1.173880 |
 | Radiacion: |  0.277 | 32.74 | 16.731543 |
+
+
+* Base de datos hotel
+Un hotel solicita los servicios informáticos de una empresa dedicada a bases de datos para realizar un programa de gestión de sus habitaciones y desea almacenar información sobre la demanda de las habitaciones cuádruples y simples para poder decidir si reforma estas habitaciones y las convierte en dobles o triples. El hotel ya cuenta con parte de las estadísticas de uso de cada habitación en un archivo (Datos.txt) con los siguientes datos que aparecen en el enunciado: planta, número de habitación, tipo de habitación frecuencia de utilización semanal.
+
+#+BEGIN_SRC C
+#include <stdio.h>
+#include <string.h>
+
+int main()
+{
+  FILE *pdat, *putil;
+  char hab[10];
+  int acuS=0, acuC=0, planta, frec, num;
+  pdat=fopen(“Datos.txt”, “r”);
+  if(pdat == NULL)
+  {
+    printf("Error en al abrir el archivo de lectura");
+    return -1;
+  }
+  else
+  {
+    while (!feof(pdat))
+    {
+      fscanf(pdat, “%i %i %s %i”, &planta, &num, hab, &frec );
+      if(strcmp(hab, “simple”) == 0 )
+      {
+        acuS = acuS + frec;
+      }
+      if(strcmp(hab, “cuadruple”) == 0 )
+      {
+        acuC = acuC + frec;
+      }
+    }
+  }
+
+  putil=fopen(“Utilizacion.txt”, “w”);
+  if(putil == NULL)
+  {
+    printf("Error en al abrir el archivo de escritura");
+    return -1;
+  }
+  else
+  {
+    fprintf(putil, “simple %i \n cuádruple %i”, acuS, acuC);
+  }
+  
+  fclose (putil);
+  fclose(pdat);
+
+  return 0;
+}//fin main
+
+#+END_SRC
+
+
+* Análisis de datos
+En este ejercicio debes escribir un programa que lea un fichero de datos, y escriba otro fichero diferente con un subconjunto de los datos leídos. El fichero es: NO2Madrid.csv Este fichero contiene datos de las estaciones de vigilancia atmosférica de la ciudad de Madrid. Tiene 8702 filas y 5 columnas. Cada fila corresponde a la medida diaria de NO2 de una estación concreta. El significado de las columnas es el siguiente: código numérico de la estación, mes, día, año, valor de la medida. El separador usado entre cada dato se un punto y coma (;). El procedimiento que debes seguir al escribir este programa es:
+ - Define un tipo de datos estructura adecuado para la información que contiene el fichero. 
+ - Lee el fichero y almacena la información en un vector de estructuras con el tipo de datos que has definido. Aunque el número de filas a leer ya está predeterminado (8702), debes escribir el código de forma generalizable (es decir, con un cambio simple se podrá leer un fichero con un número de filas distinto, aunque conocido).
+ - Elige una estación cualquiera de la tabla siguiente. En un fichero diferente debes almacenar los datos únicamente de esta estación. Este fichero debe tener 4 columnas (mes, día, año, valor de la medida). La primera fila de este fichero debe ser una cabecera con el nombre de estas columnas (mes, día, año, valor). La segunda fila y siguientes contendrán los datos de la estación. Puedes usar el separador que te parezca oportuno.
+
+#+BEGIN_SRC C
+#include <stdio.h>
+
+#define N 8702
+
+typedef struct
+{
+  int num_estacion;
+  int mes;
+  int dia;
+  int anho;
+  int valor;  
+}estacion;
+
+int main()
+{
+  FILE *plectura, *pescritura;
+  
+  estacion medidas[N];
+  
+  int moratalaz = 28079036;
+  int i = 0;
+  
+  plectura=fopen("NO2Madrid.csv", "r");
+  if (plectura == NULL)
+  {
+    printf("Error al abrir el fichero de lectura.\n");
+    return -1;
+  }
+  else
+  {
+    pescritura=fopen("moratalaz.csv", "w");
+  if (plectura == NULL)
+  {
+    printf("Error al abrir el fichero de lectura.\n");
+    return -1;
+  }
+  else
+  {
+      fprintf(pescritura, "mes, dia, anho, valor\n", medidas[i].num_estacion, medidas[i].dia, medidas[i].mes, medidas[i].anho, medidas[i].valor);      
+      while(fscanf(plectura, "%i;%i;%i;%i;%i", &medidas[i].num_estacion, &medidas[i].dia, &medidas[i].mes, &medidas[i].anho, &medidas[i].valor) != EOF)
+      {     
+        if(moratalaz == medidas[i].num_estacion)
+        {
+          fprintf(pescritura, "%i,%i,%i,%i\n", medidas[i].dia, medidas[i].mes, medidas[i].anho, medidas[i].valor);
+        }
+        i++;
+      }       
+  }
+  } 
+   
+  fclose(pescritura);
+  fclose(plectura);
+  
+  return 0;
+
+}//fin main
+
+
+#+END_SRC
+
 
