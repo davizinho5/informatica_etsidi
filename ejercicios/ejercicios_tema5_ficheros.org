@@ -381,6 +381,94 @@ int main()
 
 #+END_SRC
 
+SOLUCIÓN SIN STRING.H
+#+BEGIN_SRC C
+#include <stdio.h>
+
+// Abrir fichero de números
+// Leer fila a fila
+// Calcular suma por fila
+// Escribir nuevo fichero los datos de cada suma
+// cada dato escrito en una nueva linea
+
+typedef struct
+{
+  int planta;
+  int num;
+  char tipo[15];
+  int freq;
+}base_datos;
+
+//Datos.txt
+//1 102 simple 1
+int main()
+{
+  FILE *plectura, *pescritura;
+  base_datos habitacion;
+  int suma_sim=0, suma_cuad=0;
+  
+  // Abrimos fichero para escritura
+  plectura = fopen("Datos.txt", "r");
+  pescritura = fopen("sumas.txt", "w");
+  
+  // cadenas utilizadas para hacer la comparacion
+  char simple[] = "simple";
+  char cuadruple[] = "cuadruple";
+  int i = 0;
+  if (plectura == NULL) // Si el resultado es NULL mensaje de error
+  {
+    printf("Error al abrir el fichero.\n");
+    return -1;
+  }
+  else
+  {
+    if (pescritura == NULL) // Si el resultado es NULL mensaje de error
+    {
+      printf("Error al abrir el fichero.\n");
+      return -1;
+    }
+    else
+    {
+      while(fscanf(plectura, "%i %i %s %i", &habitacion.planta, &habitacion.num, 
+                                            habitacion.tipo, &habitacion.freq  ) != EOF)
+      {
+       //guarda la suma de frecuencia de utilización
+       //semanal de las habitaciones simples y cuádruples        
+        printf("%i %i %s %i\n", habitacion.planta, habitacion.num, habitacion.tipo, habitacion.freq);
+        // recorrer cadena "simple" para saber si son iguales
+        while( (habitacion.tipo[i] != '\0') && (simple[i] != '\0') && (simple[i] == habitacion.tipo[i]) )
+        {
+          i++;
+        }
+        // si has llegado hasta el final
+        if((simple[i] == '\0') && (habitacion.tipo[i] == '\0')) 
+        {
+          suma_sim = suma_sim + habitacion.freq;
+        }
+        i=0;
+        // recorrer cadena "cuadruple" para saber si son iguales
+        while( (habitacion.tipo[i] != '\0') && (cuadruple[i] != '\0') && (cuadruple[i] == habitacion.tipo[i]) )
+        {
+          i++;
+        }
+        // si has llegado hasta el final
+        if(cuadruple[i] == '\0' && (habitacion.tipo[i] == '\0')) 
+        {
+          suma_cuad = suma_cuad + habitacion.freq;
+        }  
+        i=0;
+      }  
+       printf("Suma simple: %i , suma cuadruple: %i\n", suma_sim, suma_cuad);
+      fprintf(pescritura, "Suma simple: %i , suma cuadruple: %i\n", suma_sim, suma_cuad);
+
+
+    }
+  }
+  fclose(pescritura);
+  fclose(plectura);
+  return 0;
+}
+#+END_SRC
 
 * Análisis de datos
 En este ejercicio debes escribir un programa que lea un fichero de datos, y escriba otro fichero diferente con un subconjunto de los datos leídos. El fichero es: NO2Madrid.csv Este fichero contiene datos de las estaciones de vigilancia atmosférica de la ciudad de Madrid. Tiene 8702 filas y 5 columnas. Cada fila corresponde a la medida diaria de NO2 de una estación concreta. El significado de las columnas es el siguiente: código numérico de la estación, mes, día, año, valor de la medida. El separador usado entre cada dato se un punto y coma (;). El procedimiento que debes seguir al escribir este programa es:
