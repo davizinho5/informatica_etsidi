@@ -157,10 +157,10 @@ int producto(int a, int b)
 void tabla(int n)
 {
   int i;
-  printf("Tabla del %d:\n", n);
+  printf("Tabla del %i:\n", n);
   for (i = 1; i <= 10; i++)
   {
-    printf("%d x %d = %d\n", n, i, producto(n, i));
+    printf("%i x %i = %i\n", n, i, producto(n, i));
   }
 }
 #+END_SRC
@@ -221,11 +221,11 @@ int main()
   int x, y, z, max;
 
   printf("Introduzca tres valores:\n");
-  scanf("%d %d %d", &x, &y, &z);
+  scanf("%i %i %i", &x, &y, &z);
 
   max = max3(x, y, z);
   
-  printf("El mayor es %d.\n", max);
+  printf("El mayor es %i.\n", max);
 
   return 0;
 }
@@ -275,11 +275,11 @@ int main()
   int n, k, a;
 
   printf("Introduzca n y k:\n");
-  scanf("%d %d", &n, &k);
+  scanf("%i %i", &n, &k);
 
   a = combina(n, k);
 
-  printf("El resultado es %d.\n", a);
+  printf("El resultado es %i.\n", a);
 
   return 0;
 }
@@ -329,11 +329,11 @@ int main()
 {
   int i, num;
 
-  scanf("%d", &num);
+  scanf("%i", &num);
 
   for (i = 1; i <= num; i++)
   {
-    printf("%d \t %lld\n", i, fib(i));
+    printf("%i \t %lld\n", i, fib(i));
   }
   return 0;
 }
