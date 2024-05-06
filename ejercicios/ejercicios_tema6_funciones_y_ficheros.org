@@ -65,7 +65,7 @@ int main ()
       }
       // Cerramos fichero
       fclose(fDestino);
-      printf("\nCopia finalizada con exito, se han hecho %d cambios.\n", cambios);
+      printf("\nCopia finalizada con exito, se han hecho %i cambios.\n", cambios);
       
       return 0;
     }
