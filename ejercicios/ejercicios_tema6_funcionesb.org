@@ -698,7 +698,7 @@ int main()
 
     // Mostrar los datos leidos
     printf("Nombre de la señal: %s\n", datos.nombre);
-    printf("Número de muestras: %d\n", datos.n_muestras);
+    printf("Número de muestras: %i\n", datos.n_muestras);
     printf("Muestras:\n");
     
     for (i = 0; i < datos.n_muestras; i++) 
