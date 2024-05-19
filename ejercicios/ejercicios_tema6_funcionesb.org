@@ -21,8 +21,8 @@ int main ()
 {
   FILE *fOrigen, *fDestino;
   char texto[1000];    // Definimos un vector suficientemente largo
-	int cambios; 
-	
+  int cambios; 
+  
   // Abre ficheros:
   // El origen en modo lectura:
   fOrigen = fopen("lorem_ipsum.txt", "r");
@@ -298,7 +298,7 @@ double minimo(double x[], int n)
   {
     if (x[i] < mn)
     {
-      mn = x[i];		
+      mn = x[i];    
     }
   }
   
@@ -325,4 +325,389 @@ double promedio(double x[], int n)
 | Humedad:   |  19.89 | 100.0 |  62.16033 |
 | Viento:    |  0.251 |  8.26 |  1.173880 |
 | Radiacion: |  0.277 | 32.74 | 16.731543 |
+
+* Nóminas
+
+Se debe calcular la nómina mensual de un empleado que trabaja por horas, el pago de cada hora trabajada depende de su categoría:
+categoría | pago x hora (€.)
+| A | 30.00
+| B |20.50
+| C | 18.50
+
+Además, si el empleado trabaja más de 150 horas mensuales tiene una bonificación del 5% de nómina. El programa que calcula la nómina está compuesto por dos funciones, una que solicita los datos del empleado por teclado y otra función que calcula la nómina mensual. El programa principal debe mostrar la nómina mensual calculada del empleado introducido. Para los datos del empleado se debe usar la siguiente estructura:
+#+BEGIN_SRC C
+typedef struct
+{
+  char nom[40], categoria;
+  int horas;
+  float nomina, pHora, bonf;
+} empleado;
+
+
+Los prototipos de las funciones que se tienen que utilizar son los siguientes: 
+#+BEGIN_SRC C
+
+empleado pedirDatos(empleado emp);
+float calcularNomina (empleado);
+#+END_SRC
+
+Ejemplo de ejecución:
+Introduzca nombre empleado: Pepe Campo
+Introduzca categoría del empleado: B
+Introduzca horas trabajadas: 25
+La nómina total del empleado Pepe Campo es: 512.50 euros, con un total de 0 euros de bonificación
+extra.
+#+BEGIN_SRC C
+#include <stdio.h>
+
+typedef struct
+{
+  char nom[40], categoria;
+  int horas;
+  float nomina, pHora, bonf;
+} empleado;
+
+// Funcion encargada de pedir los datos al usuario
+empleado pedirDatos();
+
+// Funcion encargada de calcular la nomina mensual del empleado
+float calcularNomina (empleado emp);
+
+int main()
+{
+  empleado emp;
+  
+  // se asigna a una variable de tipo empleado
+  // el valor devuelto por la función pedirDatos
+  emp = pedirDatos();
+  
+  // se asigna a una variable de tipo float
+  // el valor devuelto por la función calcularNomina
+  // y se guarda en la variable nómina dentro de la estructura
+  emp.nomina = calcularNomina(emp);
+  
+  // se calcula la bonificación en caso de ser necesario
+  if(emp.horas > 150)
+  {
+    emp.bonf = emp.nomina * 0.05;
+  }
+  else
+  {
+    emp.bonf = 0;
+  }
+  emp.nomina = emp.nomina + emp.bonf;
+  
+  printf("La nómina total del empleado %s es: %f euros, con un total de %f euros de bonificacion extra.", emp.nom, emp.nomina, emp.bonf);
+  return 0;
+}
+
+empleado pedirDatos()
+{
+  empleado persona;
+  printf("Introduzca nombre empleado: ");
+  scanf("%39[^\n]", persona.nom);
+  
+  fflush(stdin);
+  printf("\nIntroduzca categoría del empleado: ");
+  scanf("%c", &persona.categoria);
+  
+  printf("\nIntroduzca horas trabajadas: ");
+  scanf("%i", &persona.horas);
+  
+  return persona;
+}
+
+float calcularNomina (empleado emp)
+{  
+  // de asigna el precio hora según la categoría
+  // podría hacerse son if...else encadenados
+  switch(emp.categoria)
+  {
+    case 'A':
+      emp.pHora = 30.0;
+      break;
+    case 'B':
+      emp.pHora = 20.5;
+      break;
+    case 'C':
+      emp.pHora = 18.5;
+      break;
+    default:
+      printf("Esta catergoria no existe\n");  
+  }
+  
+  emp.nomina = emp.pHora*emp.horas;
+  
+
+  return emp.nomina;
+}
+#+END_SRC C
+
+
+* Texto
+Programe un programa en lenguaje C que solicite una frase al usuario, la modifique y presente en pantalla el resultado, con las siguientes características:
+
+- Se fijará el tamaño máximo de la frase con una directiva define.
+- Tendrá una función específica, que realizará la modificación:
+#+BEGIN_SRC C
+int modificaT(char texto[]) 
+#+END_SRC C
+- La modificación consistirá en:    
+    - Solicitar al usuario una letra
+    - Se solucida al usuario una frase
+    - Localizarla en el texto y sustituirla por un 5 si está en mayúsculas y por un 7 si está en minúsculas.
+- El retorno de la función será el número de sustituciones realizadas.
+- La presentación de la frase modificada se hará desde main e incluirá el número de sustituciones realizadas. Si no hay modificaciones solo aparecerá el correspondiente mensaje.
+- Finalmente se preguntará al usuario si desea repetir el proceso con una nueva frase y se procederá en consecuencia.
+
+#+BEGIN_SRC C
+#include <stdio.h>
+#include <string.h>
+
+#define MAX_FRASE 100
+
+// Prototipo de la función que modifica la frase
+int modificaT(char texto[]);
+
+int main() 
+{
+    char frase[MAX_FRASE];
+    char repetir;
+
+    do {
+        // Solicitar la frase al usuario
+        printf("Introduce una frase (max %i caracteres): ", MAX_FRASE - 1);
+        scanf("%99[^\n]s", frase);
+
+        // Modificar la frase
+        int numSustituciones = modificaT(frase);
+
+        // Mostrar la frase modificada y el número de sustituciones
+        printf("Frase modificada: %s\n", frase);
+        
+        if (numSustituciones > 0) 
+        {
+            printf("Numero de sustituciones realizadas: %i\n", numSustituciones);
+        } 
+        else 
+        {
+            printf("No se realizaron sustituciones.\n");
+        }
+
+        // Preguntar si desea repetir el proceso
+        printf("Desea introducir una nueva frase? (s/n): ");
+        // Limpiar el buffer de entrada de teclado
+        fflush(stdin);   
+        scanf("%c", &repetir);
+        
+    // se compruebe si se elige una s y si no se acaba el programa
+    } while (repetir == 's' || repetir == 'S');
+
+    return 0;
+}
+
+// Implementación de la función que modifica la frase
+int modificaT(char texto[]) 
+{
+    char letra;
+    int sustituciones = 0;
+
+    // Solicitar la letra al usuario
+    printf("Introduce una letra: ");
+    fflush(stdin);
+    scanf("%c", &letra);
+
+    // Recorrer el texto y realizar las sustituciones
+    int i;
+    for (i = 0; texto[i] != '\0'; i++) 
+    {
+      if (texto[i] == letra) 
+      {
+        if (letra >= 'A' && letra <= 'Z') 
+        {
+          texto[i] = '5';
+        } 
+        else
+        {
+          if (letra >= 'a' && letra <= 'z') 
+          {
+            texto[i] = '7';
+          }
+        }
+        sustituciones++;
+      }
+    }
+
+    return sustituciones;
+}
+#+END_SRC C
+
+
+
+* Almacén
+Se desea hacer un programa informático que calcule la cantidad de dinero inmovilizado en un almacén de productos. El dinero inmovilizado equivale al precio por unidad del producto multiplicado por la cantidad de productos disponibles en el almacén. Además, si la cantidad de productos en el almacén es menor o igual a 10 unidades, debe indicar la necesidad de hacer el pedido de dicho producto.
+Estructure su código de la siguiente manera.
+- Generación del Almacén: vector de estructuras cuya dimensión se establece al inicio del programa según las necesidades del usuario. Formato del tipo de dato:
+#+BEGIN_SRC C
+typedef struct
+{
+  char cod[5]; //Código del prodcuto
+  int stock; //cantidad de producto en almacen
+  float precio; //precio por unidad
+}INV;
+#+END_SRC C
+- Inicialización del Almacén: se realiza mediante la función generaInventario(). Esta función recibe como parámetros el vector de estructuras y la cantidad de elementos del vector. El usuario debe introducir por teclado cada uno de los elementos de la estructura a fin de inicializarla:
+#+BEGIN_SRC C
+void generaInventario(INV inventario[], int numero_items);
+#+END_SRC C
+- Gestión del Almacén:: se realiza mediante una función que recibe como argumento un elemento (solo UNO) del vector de estructura previamente inicializado y calcula la cantidad de dinero inmovilizado en el almacén, en euros. Además, avisa al usuario si se necesita hacer un perido cuando el stock sea menor o igual a 10. La función retorna la cantidad de euros inmovilizados del producto:
+#+BEGIN_SRC C
+float calculaInmovilizado(INV producto)
+#+END_SRC C
+
+
+#+BEGIN_SRC C
+#include <stdio.h>
+#include <string.h>
+
+#define MAX_CODIGO 5
+#define NUM_ITEMS 2
+
+typedef struct 
+{
+    char cod[MAX_CODIGO]; // Código del producto
+    int stock;            // Cantidad de producto en almacén
+    float precio;         // Precio por unidad
+} INV;
+
+// Prototipos de las funciones
+void generaInventario(INV inventario[], int numero_items);
+float calculaInmovilizado(INV producto);
+
+int main() 
+{
+    int numero_items;
+
+    // Crear el vector de estructuras INV
+    // con numero de onjetos inventariados fijo 
+    INV inventario[NUM_ITEMS];
+
+    // Inicializar el inventario
+    generaInventario(inventario, NUM_ITEMS);
+
+    // Calcular y mostrar el dinero inmovilizado en el almacén
+    float total_inmovilizado = 0;
+    int i;
+    for (i = 0; i < NUM_ITEMS; i++) 
+    {
+        float inmovilizado = calculaInmovilizado(inventario[i]);
+        total_inmovilizado = total_inmovilizado + inmovilizado;
+    }
+
+    printf("Dinero total inmovilizado en el almacén: %.2f euros\n", total_inmovilizado);
+
+    return 0;
+}
+
+// Implementación de la función generaInventario
+void generaInventario(INV inventario[], int numero_items) 
+{
+    int i;
+    for (i = 0; i < numero_items; i++) 
+    {
+        printf("Introduce los datos del producto %i\n", i + 1);
+        printf("Código del producto: ");
+        scanf("%s", inventario[i].cod);
+
+        printf("Cantidad en almacén: ");
+        scanf("%i", &inventario[i].stock);
+        printf("Precio por unidad: ");
+        scanf("%f", &inventario[i].precio);
+    }
+}
+
+// Implementación de la función calculaInmovilizado
+float calculaInmovilizado(INV producto) 
+{
+    float inmovilizado = producto.precio * producto.stock;
+
+    if (producto.stock <= 10) 
+    {
+        printf("El producto con código %s necesita ser pedido. Stock actual: %i\n", producto.cod, producto.stock);
+    }
+
+    return inmovilizado;
+}
+
+#+END_SRC C
+
+
+* Audio
+Un fichero de texto está formado por las muestras obtenidas de la digitalización de una señal de un sensor de audio. La primera fila contiene una cadena de caracteres que representa el nombre de la señal, la segunda fila un número entero que es el número de muestras, y el resto de filas son los números reales que representan las muestras. Elabore un programa que lea el contenido del fichero y almacena los datos en una variable cuyo tipo será el declarado en la siguiente estructura.
+#+BEGIN_SRC C
+typedef struct
+{
+  char nombre[50]; //Código del prodcuto
+  int n_muestras; //cantidad de producto en almacen
+  float muestras[100]; //precio por unidad
+}audio;
+#+END_SRC C
+
+Genere un fichero de muestras datos.txt con los datos explicados en el enunciado y 10 muetsras de datos para probar su programa.
+Una vez leídos los datos, muéstrelos por pantalla. 
+
+#+BEGIN_SRC C
+#include <stdio.h>
+
+#define MAX_NOMBRE 10
+#define MAX_MUESTRAS 100
+
+typedef struct
+{
+    char nombre[MAX_NOMBRE];       // Nombre de la señal
+    int n_muestras;                // Número de muestras
+    float muestras[MAX_MUESTRAS];  // Valores de las muestras
+} audio;
+
+int main() 
+{
+    audio datos;
+    
+    FILE *archivo = fopen("datos.txt", "r");
+    
+    if (archivo == NULL) 
+    {
+        printf("No se pudo abrir el archivo datos.txt\n");
+        return -1;
+    }
+
+    // Leer el nombre de la señal
+    fscanf(archivo, "%9s", datos.nombre);
+    
+    // Leer el número de muestras
+    fscanf(archivo, "%i", &datos.n_muestras);
+
+    // Leer las muestras
+    int i;
+    for (i = 0; i < datos.n_muestras; i++) 
+    {
+        fscanf(archivo, "%f", &datos.muestras[i]);
+    }
+
+    fclose(archivo);
+
+    // Mostrar los datos leidos
+    printf("Nombre de la señal: %s\n", datos.nombre);
+    printf("Número de muestras: %d\n", datos.n_muestras);
+    printf("Muestras:\n");
+    
+    for (i = 0; i < datos.n_muestras; i++) 
+    {
+        printf("%f\n", datos.muestras[i]);
+    }
+
+    return 0;
+}
+#+END_SRC C
+
 
