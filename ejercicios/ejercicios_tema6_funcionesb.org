@@ -669,6 +669,8 @@ typedef struct
     float muestras[MAX_MUESTRAS];  // Valores de las muestras
 } audio;
 
+float media(audio datos);
+
 int main() 
 {
     audio datos;
@@ -705,9 +707,22 @@ int main()
     {
         printf("%f\n", datos.muestras[i]);
     }
-
+    
+    printf("La media de las muestras es: %f\n", media(datos));
     return 0;
 }
+
+float media(audio datos)
+{
+	int i;
+	float suma = 0;
+	for (i = 0; i < datos.n_muestras; i++) 
+  {
+    suma = suma + datos.muestras[i];
+  }
+  return (suma/datos.n_muestras);
+}
+
 #+END_SRC C
 
 
