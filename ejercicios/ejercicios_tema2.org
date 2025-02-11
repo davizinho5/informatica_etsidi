@@ -5,64 +5,6 @@
 #+PROPERTY: header-args :exports none
 #+EXPORT_FILE_NAME: ejercicios_tema2.pdf
 
-* Códigos ASCII
-- Escriba un programa que permita averiguar qué acrónimo está representado por los códigos ASCII:  101    116     115     105    100  105
-
-#+BEGIN_SRC C
-#include <stdio.h>
-
-int main()
-{
-  printf("El acrónimo es %c%c%c%c%c%c", 101, 116, 115, 105, 100, 105);
-  return 0;
-}
-#+END_SRC
-
-#+RESULTS:
-: El acrónimo es etsidi
-
-- Escriba un programa que imprima en pantalla las letras vocales y sus correspondientes caracteres ASCII.
-
-#+BEGIN_SRC C
-#include <stdio.h>
-
-int main()
-{
-  printf("Los códigos ASCII de las vocales son:\n");
-  // Usando %i se imprime un char como entero.
-  // El código \t inserta un tabulador.
-  printf("a: %i\t", 'a');
-  printf("e: %i\t", 'e');
-  printf("i: %i\t", 'i');
-  printf("o: %i\t", 'o');
-  printf("u: %i\n", 'u'); 
-  
-  return 0;
-}
-#+END_SRC
-
-- Desarrolle un programa que lea un carácter en minúscula y lo imprima en mayúscula. Tenga en cuenta que las letras mayúscula de la A a la Z y las minúsculas de la a a la z tienen códigos consecutivos (ver tabla ASCII).
-
-#+BEGIN_SRC C
-#include <stdio.h>
-
-int main()
-{
-  char letra_m, Letra_M;
-  const int conv = 'A' - 'a'; // Diferencia entre mayuscula y minuscula
-  
-  printf("Escriba una letra minuscula:\n");
-  scanf("%c", &letra_m);
-  
-  // Paso a mayuscula mediante la constante conv
-  Letra_M = letra_m + conv;
-  printf("En mayuscula es %c\n", Letra_M);
-  
-  return 0;
-}
-#+END_SRC
-
-
 * Cálculo del IVA
 Realice un programa para calcular el IVA de un producto cuyo precio es introducido por el usuario. Suponga que el IVA es del 21%. 
 Muestre el resultado con 2 decimales.
@@ -193,7 +135,7 @@ int main()
 #+END_SRC
 
 
-* Comparaciones (sin operador ternario)
+* Comparaciones (difícil tener la idea)
 Escribir un programa que lea 2 números enteros e imprima: un 1 si uno de los números es igual a 8; 2 si los 2 números son iguales al 8.
 
 #+BEGIN_SRC C
@@ -217,54 +159,6 @@ int main()
 }
 #+END_SRC
 
-* Comparaciones (con operador ternario)
-Escribir un programa que lea 2 números enteros e imprima: un 1 si uno de los números es igual a 8; 2 si los 2 números son iguales al 8.
-
-#+BEGIN_SRC C
-#include <stdio.h>
-
-int main()
-{
-  int a, b;
-  printf("Escriba 2 numeros enteros:\n");
-  scanf("%i", &a);
-  scanf("%i", &b);  
-
-  // Como el resultado de una comparación es 1 (true) o 0 (false)
-  // Podemos usar el 1 (true) para sumar el número de ochos.
-  int resultado = (a == 8);
-  resultado = resultado + (b == 8);
-  	
-  printf("%i", (resultado == 2 ? 2 : 1));
-	
-  return 0;
-}
-#+END_SRC
-
-
-* Años bisiestos (operadores de comparación y ternario)
-/Un año es bisiesto si es divisible por 4 pero no por 100, o si es divisible por 400./
-- Escriba un programa que indique si un número es bisiesto a partir de un número introducido por el usuario. 
-#+BEGIN_SRC C
-#include <stdio.h>
-int main() 
-{ 
-  int x;
-  int bisiesto;
-
-  printf("Dime un número entero.\n");
-  scanf("%i", &x);
-
-  // Definimos la condicion de ser bisiesto
-  // divisible por 4,     pero no por 100     ó     divisible por 400 
-  bisiesto = ((x % 4 == 0) && (x % 100 != 0)) || (x % 400 == 0);
-  
-  printf("En el anho %i febrero tiene %i dias\n", x, (bisiesto ? 29 : 28));
-  return 0;
-} 
-#+END_SRC
-
-
 ** En los siguientes ejercicios, use math.h cuando lo necesite
 
 * Volumen de una esfera
@@ -277,10 +171,10 @@ int main()
 {
   float r, area;
   // Definimos el valor de pi como una constante de tipo float
-  const float pi = 3.141592;
+  const float PI = 3.141592;
   printf("Introduce el radio de la esfera \n");
   scanf("%f", &r);
-  area = 4.0 / 3.0 * pi * r * r * r;
+  area = 4.0 / 3.0 * PI * r * r * r;
   printf("El volumen de la esfera es %f \n", area);
   
   return 0;
@@ -401,6 +295,62 @@ int main()
 }
 #+END_SRC
 
+* Códigos ASCII
+- Escriba un programa que permita averiguar qué acrónimo está representado por los códigos ASCII:  101    116     115     105    100  105
+
+#+BEGIN_SRC C
+#include <stdio.h>
+
+int main()
+{
+  printf("El acrónimo es %c%c%c%c%c%c", 101, 116, 115, 105, 100, 105);
+  return 0;
+}
+#+END_SRC
+
+#+RESULTS:
+: El acrónimo es etsidi
+
+- Escriba un programa que imprima en pantalla las letras vocales y sus correspondientes caracteres ASCII.
+
+#+BEGIN_SRC C
+#include <stdio.h>
+
+int main()
+{
+  printf("Los códigos ASCII de las vocales son:\n");
+  // Usando %i se imprime un char como entero.
+  // El código \t inserta un tabulador.
+  printf("a: %i\t", 'a');
+  printf("e: %i\t", 'e');
+  printf("i: %i\t", 'i');
+  printf("o: %i\t", 'o');
+  printf("u: %i\n", 'u'); 
+  
+  return 0;
+}
+#+END_SRC
+
+- Desarrolle un programa que lea un carácter en minúscula y lo imprima en mayúscula. Tenga en cuenta que las letras mayúscula de la A a la Z y las minúsculas de la a a la z tienen códigos consecutivos (ver tabla ASCII).
+
+#+BEGIN_SRC C
+#include <stdio.h>
+
+int main()
+{
+  char letra_m, Letra_M;
+  const int conv = 'A' - 'a'; // Diferencia entre mayuscula y minuscula
+  
+  printf("Escriba una letra minuscula:\n");
+  scanf("%c", &letra_m);
+  
+  // Paso a mayuscula mediante la constante conv
+  Letra_M = letra_m + conv;
+  printf("En mayuscula es %c\n", Letra_M);
+  
+  return 0;
+}
+#+END_SRC
 
 
 
