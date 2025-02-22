@@ -263,6 +263,83 @@ int main()
 }
 #+END_SRC
 
+* Letras
+Escriba un programa que solicite 2 caracteres al usuario y los imprima ordenados alfabéticamente. 
+
+#+BEGIN_SRC C
+#include <stdio.h>
+
+int main() 
+{
+    char c1, c2;
+    // Solicitar entrada al usuario
+    printf("Introduce dos caracteres: ");
+    scanf("%c", &c1);
+    scanf(" %c", &c2);
+
+    if (c1 > c2) 
+    {
+        printf("Ordenados: %c %c\n", c2, c1);
+    } else
+    {
+        printf("Ordenados: %c %c\n", c1, c2);
+    }    
+    return 0;
+}
+#+END_SRC
+
+* Sistema de ecuaciones
+Sea un sistema de escuaciones: 
+
+    $a \cdot x + b \cdot y = c$
+
+    $d \cdot x + e \cdot y = f$
+
+del que se pueden calcular las soluciones como:
+
+    $x = (ce-bf)/(ae-bd)$
+
+    $y = (af-cd)/(ae-bd)$
+
+Escriba un programa que lea los coeficientes de las ecuaciones (a, b, c, d, e, f), y luego resuelva el sistema. 
+Indique cuando el sistema no tiene solución. 
+
+#+BEGIN_SRC C
+#include <stdio.h>
+
+int main() 
+{
+    float a, b, c, d, e, f;
+    float x, y, denominador;
+
+    // Solicitar los coeficientes al usuario
+    printf("Introduce los coeficientes a, b, c, d, e, f separados por espacios:\n");
+    scanf("%f %f %f %f %f %f", &a, &b, &c, &d, &e, &f);
+
+    // Calcular el determinante del sistema
+    denominador = a * e - b * d;
+
+    // Verificar si el sistema tiene solución
+    if (denominador == 0) {
+        printf("El sistema no tiene solución o tiene infinitas soluciones.\n");
+    } else 
+    {
+        // Calcular las soluciones
+        x = (c * e - b * f) / denominador;
+        y = (a * f - c * d) / denominador;
+
+        // Imprimir la solución
+        printf("Solución del sistema:\n");
+        printf("x = %.2f\n", x);
+        printf("y = %.2f\n", y);
+    }
+
+    return 0;
+}
+
+#+END_SRC
+
+
 * Ecuación de segundo  grado
 Escribe un programa que pida los coeficientes de una ecuación de segundo grado ($a \cdot x^2 + b \cdot x + c = 0$) y escriba la solución. Recuerda que una ecuación de segundo grado puede tener dos soluciones reales diferentes, una única solución real, o dos soluciones complejas conjugadas.
 
