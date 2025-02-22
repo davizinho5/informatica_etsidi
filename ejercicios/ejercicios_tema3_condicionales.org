@@ -6,40 +6,7 @@
 #+PROPERTY: header-args :exports none
 #+EXPORT_FILE_NAME: ejercicios_tema3_condicionales.pdf
 
-* Años bisiestos
-Escribe un programa que permita comprobar si un año (dado por teclado) es bisiesto o no. Recuerda que son bisiestos los años divisibles por 4, excepto los que son divisibles por 100 pero no por 400.
-
-#+BEGIN_SRC C
-#include <stdio.h>
-
-int main()
-{
-  // Usaremos esta variable para guardar el año que introduce el usuario
-  int year;
-  // Usaremos esta variable para guardar la valoración del año
-  int isBisiesto;
-
-  printf("Indique el año.\n");
-  scanf("%i", &year);
-
-  // Esta ecuación lógica debe resultar verdadero (1) si el año es bisiesto, o falso (0) si no o es
-    isBisiesto = ((year % 4 == 0) && (year % 100 != 0)) || (year % 400 == 0);
-
-  if (isBisiesto == 1)
-  {
-    printf("El año %i es bisiesto.\n", year);    
-  }
-  else
-  {
-    printf("El año %i no es bisiesto.\n", year);
-  }
-
-  return 0;
-}
-#+END_SRC
-
-
-* Números enteros
+* Números divisibles
 
 Escribe un programa que compruebe si, dados dos números enteros tecleados por el usuario, el primero es divisible por el segundo.
 
@@ -383,6 +350,35 @@ int main()
 }
 #+END_SRC
 
+* Años bisiestos
+Escribe un programa que permita comprobar si un año (dado por teclado) es bisiesto o no. Recuerda que son bisiestos los años divisibles por 4, excepto los que son divisibles por 100 pero no por 400.
+
+#+BEGIN_SRC C
+#include <stdio.h>
+
+int main()
+{
+  // Usaremos esta variable para guardar el año que introduce el usuario
+  int year;
+  // Usaremos esta variable para guardar la valoración del año
+  int isBisiesto;
+
+  printf("Indique el año.\n");
+  scanf("%i", &year);
+
+  // Esta ecuación lógica debe resultar verdadero (1) si el año es bisiesto, o falso (0) si no o es
+  if (((year % 4 == 0) && (year % 100 != 0)) || (year % 400 == 0))
+  {
+    printf("El año %i es bisiesto.\n", year);    
+  }
+  else
+  {
+    printf("El año %i no es bisiesto.\n", year);
+  }
+
+  return 0;
+}
+#+END_SRC
 
 * Piedra, papel o tijera
 En el juego para dos personas llamado "PIEDRA (I), PAPEL (P) O TIJERA (T)" cada jugador escoge ser "T", "I" o "P" respectivamente. El juego se determina así: piedra rompe tijera, tijera corta papel, papel cubre la piedra, el juego es un empate si ambos jugadores eligen la misma opción. Elaborar un programa para que determine qué jugador gana, la salida debe mostrarse de la siguiente forma: "T-I Piedra rompe tijeras gana el jugador 2.
