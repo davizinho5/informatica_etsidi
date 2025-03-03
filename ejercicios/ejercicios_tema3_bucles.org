@@ -218,7 +218,7 @@ int main()
 
 * Imprimir abecedario
 Escribe un programa que imprima el abecedario en letras minúsculas usando, solamente, variables
-de tipo char. Recuerdo que, en memoria, estas variable se guardan como números.
+de tipo char. Recuerde que, en memoria, estas variables se guardan como números.
 
 #+BEGIN_SRC C
 #include <stdio.h>
@@ -309,7 +309,7 @@ int main()
 * Aproximación a \pi
 
 Realiza un programa que calcule una aproximación al número \pi mediante el sumatorio de la serie:
-$\pi \simeq 4 \cdot \sum_{n = 0}^{10^6}  \frac{(-1)^n}{2n + 1}$
+\pi \simeq 4 \cdot \sum_{n = 0}^{10^6}  (-1)^n / (2n + 1)
 
 #+BEGIN_SRC C
 #include <stdio.h>
@@ -317,8 +317,8 @@ $\pi \simeq 4 \cdot \sum_{n = 0}^{10^6}  \frac{(-1)^n}{2n + 1}$
 
 int main()
 {
-  // se usa double porque es más preciso, podría hacerse con float
-  double pi = 0;
+  // se hace con float, pero podría hacerse con el tipo double si se quiere más precisión
+  float pi = 0;
   int n;
 
   for (n = 0; n <= 1000000; ++n)
@@ -334,6 +334,28 @@ int main()
   return 0;
 }
 #+END_SRC 
+
+
+* Factorial
+Haga un programa que permita calcular el factorial de un número ingresado por el usuario.
+
+n! = \prod_{i=1}^{n} i = 1 \times 2 \times 3 \times \dots \times n
+
+Algunos valores comunes del factorial son:
+
+0! = 1 
+
+1! = 1 
+
+2! = 1 \times 2 = 2 
+
+3! = 1 \times 2 \times 3 = 6 
+
+4! = 1 \times 2 \times 3 \times 4 = 24 
+
+5! = 1 \times 2 \times 3 \times 4 \times 5 = 120
+
+Cuando vaya a probar el código, pruebe con valores de n menores que 15. Si todo funciona bien, pruebe con el 20. ¿Qué pasa? ¿Se le ocurre alguna solución? Consulte con el profesor si no lo entiende. 
 
 
 
