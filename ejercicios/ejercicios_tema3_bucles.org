@@ -357,6 +357,38 @@ Algunos valores comunes del factorial son:
 
 Cuando vaya a probar el código, pruebe con valores de n menores que 15. Si todo funciona bien, pruebe con el 20. ¿Qué pasa? ¿Se le ocurre alguna solución? Consulte con el profesor si no lo entiende. 
 
+#+BEGIN_SRC C
+#include <stdio.h>
+
+int main() 
+{
+    int num, factorial = 1, i;
+
+    // Solicitar al usuario un número
+    printf("Ingrese un número entero positivo: ");
+    scanf("%i", &num);
+
+    // Verificar que el número sea válido
+    if (num < 0) 
+    {
+        printf("El factorial no está definido para números negativos.\n");
+    }
+    else 
+    {
+        // Calcular el factorial usando un bucle
+        for (i = 1; i <= num; i++) 
+	{
+            factorial = factorial * i;
+        }
+        // Mostrar el resultado
+        printf("El factorial de %i es %i\n", num, factorial);
+    }
+
+    return 0;
+}
+#+END_SRC
+
+
 * Aproximación a la siguiente ecuación
 Realiza un programa que calcule una aproximación al número PI mediante la siguiente aproximación:
 #+BEGIN_EXPORT latex
