@@ -357,62 +357,6 @@ Algunos valores comunes del factorial son:
 
 Cuando vaya a probar el código, pruebe con valores de n menores que 15. Si todo funciona bien, pruebe con el 20. ¿Qué pasa? ¿Se le ocurre alguna solución? Consulte con el profesor si no lo entiende. 
 
-
-
-* Sucesión de Fibonacci
-Escribe un programa que genere los =n= primeros términos de la sucesión de Fibonacci. El número entero =n= deberá ser leído por teclado. Este valor debe ser positivo, de forma que si el usuario introduce un valor negativo el programa volverá a pedir que lo introduzca.
-
-En la sucesión de Fibonacci los dos primeros números son 1, y el resto se obtiene sumando los dos anteriores: $1, 1, 2, 3, 5, 8, 13, 21, \ldots$
-
-#+BEGIN_SRC C
-#include <stdio.h>
-
-int main()
-{
-  int i, n;
-
-  // se utilizan estas variables para guardar los valores anteriores
-  int fib1 = 1, fib2 = 1;
-  
-  // La serie crece rapidamente, y un int puede no ser suficiente
-  // Si se usa int, solo funciona para valores de n que son pequeños
-  unsigned long long int fib;
-
-  // Con un bucle do-while nos aseguramos de que el número n es mayor que 1
-  do 
-  {
-    printf("Elige el valor de n: ");
-    scanf("%i", &n);
-  }
-  while (n < 1);
-
-  // Aqui empieza el calculo de la serie
-  for (i = 1 ; i <= n ; i++)
-  {
-    // Los dos primeros terminos son 1
-    if (i <= 2)
-    {
-      fib = 1;
-    }
-    else
-    { 
-      // el resto de terminos son la suma de los dos anteriores
-      fib = fib1 + fib2;
-      // Una vez hecha la suma intercambio los valores para el
-      // siguiente paso de bucle.
-      fib1 = fib2;
-      fib2 = fib;
-    }
-    
-    // El identificador de formato esta adaptado a la clase unsigned long long int
-    printf("%llu  ", fib);
-  }
-  return 0;
-}
-#+END_SRC
-
-
-
 * Aproximación a la siguiente ecuación
 Realiza un programa que calcule una aproximación al número PI mediante la siguiente aproximación:
 #+BEGIN_EXPORT latex
@@ -503,7 +447,124 @@ int main()
 
 
 
-#+RESULTS:
+* N Números primos
+Realiza un programa que muestre por pantalla primeros N números primos. Utilice una variable que
+haga de contador para contolar la parada del bucle.
+#+BEGIN_EXPORT latex
+#include <stdio.h>
+
+int main() 
+{
+	// N: cantidad de primos
+  int N;  
+  // contador: cuenta primos encontrados
+	int contador = 0;
+	// num: número a evaluar  
+	int num = 2;
+	// Flag para controlar cuando un número es primo (true) o no (false)
+	int esPrimo;
+	// Variable usada como divisor
+	int i;
+	
+  // Solicitar al usuario la cantidad de números primos a mostrar
+  printf("Ingrese la cantidad de números primos que desea ver: ");
+  scanf("%i", &N);
+
+  printf("Los primeros %i números primos son:\n", N);
+
+  // Bucle para encontrar y mostrar los primeros N primos
+  while (contador < N) 
+	{
+			// Suponemos que el número es primo
+      esPrimo = 1; 
+      // Verificamos desde el 2 hacia arriba
+      i = 2;
+
+      // Verificar si 'num' es primo
+      while (i * i <= num && esPrimo == 1) 
+			{
+        if (num % i == 0) 
+				{
+					// No es primo, activamos el flag
+          esPrimo = 0; 
+        }
+        i++;
+      }
+
+      // Si es primo, imprimirlo y aumentar el contador
+      if (esPrimo == 1) 
+			{
+        printf("%i ", num);
+        // Aumentar el contador de primos encontrados
+        contador++; 
+      }
+
+      num++; // Pasar al siguiente número a verificar
+  }
+
+  printf("\n");
+  return 0;
+}
+#+END_SRC
+
+
+
+* Sucesión de Fibonacci
+Escribe un programa que genere los =n= primeros términos de la sucesión de Fibonacci. El número entero =n= deberá ser leído por teclado. Este valor debe ser positivo, de forma que si el usuario introduce un valor negativo el programa volverá a pedir que lo introduzca.
+
+En la sucesión de Fibonacci los dos primeros números son 1, y el resto se obtiene sumando los dos anteriores: $1, 1, 2, 3, 5, 8, 13, 21, \ldots$
+
+#+BEGIN_SRC C
+#include <stdio.h>
+
+int main()
+{
+  int i, n;
+
+  // se utilizan estas variables para guardar los valores anteriores
+  int fib1 = 1, fib2 = 1;
+  
+  // La serie crece rapidamente, y un int puede no ser suficiente
+  // Si se usa int, solo funciona para valores de n que son pequeños
+  unsigned long long int fib;
+
+  // Con un bucle do-while nos aseguramos de que el número n es mayor que 1
+  do 
+  {
+    printf("Elige el valor de n: ");
+    scanf("%i", &n);
+  }
+  while (n < 1);
+
+  // Aqui empieza el calculo de la serie
+  for (i = 1 ; i <= n ; i++)
+  {
+    // Los dos primeros terminos son 1
+    if (i <= 2)
+    {
+      fib = 1;
+    }
+    else
+    { 
+      // el resto de terminos son la suma de los dos anteriores
+      fib = fib1 + fib2;
+      // Una vez hecha la suma intercambio los valores para el
+      // siguiente paso de bucle.
+      fib1 = fib2;
+      fib2 = fib;
+    }
+    
+    // El identificador de formato esta adaptado a la clase unsigned long long int
+    printf("%llu  ", fib);
+  }
+  return 0;
+}
+#+END_SRC
+
+
+
+
+
 
 
 
