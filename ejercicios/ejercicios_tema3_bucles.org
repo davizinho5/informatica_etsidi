@@ -482,7 +482,7 @@ int main()
 * N Números primos
 Realiza un programa que muestre por pantalla primeros N números primos. Utilice una variable que
 haga de contador para contolar la parada del bucle.
-#+BEGIN_EXPORT latex
+#+BEGIN_SRC C
 #include <stdio.h>
 
 int main() 
