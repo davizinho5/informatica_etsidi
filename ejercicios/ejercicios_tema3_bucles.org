@@ -377,7 +377,7 @@ int main()
     {
         // Calcular el factorial usando un bucle
         for (i = 1; i <= num; i++) 
-	{
+        {
             factorial = factorial * i;
         }
         // Mostrar el resultado
@@ -487,17 +487,17 @@ haga de contador para contolar la parada del bucle.
 
 int main() 
 {
-	// N: cantidad de primos
+  // N: cantidad de primos
   int N;  
   // contador: cuenta primos encontrados
-	int contador = 0;
-	// num: número a evaluar  
-	int num = 2;
-	// Flag para controlar cuando un número es primo (true) o no (false)
-	int esPrimo;
-	// Variable usada como divisor
-	int i;
-	
+  int contador = 0;
+  // num: número a evaluar  
+  int num = 2;
+  // Flag para controlar cuando un número es primo (true) o no (false)
+  int esPrimo;
+  // Variable usada como divisor
+  int i;
+  
   // Solicitar al usuario la cantidad de números primos a mostrar
   printf("Ingrese la cantidad de números primos que desea ver: ");
   scanf("%i", &N);
@@ -506,18 +506,18 @@ int main()
 
   // Bucle para encontrar y mostrar los primeros N primos
   while (contador < N) 
-	{
-			// Suponemos que el número es primo
+  {
+      // Suponemos que el número es primo
       esPrimo = 1; 
       // Verificamos desde el 2 hacia arriba
       i = 2;
 
       // Verificar si 'num' es primo
       while (i * i <= num && esPrimo == 1) 
-			{
+      {
         if (num % i == 0) 
-				{
-					// No es primo, activamos el flag
+        {
+          // No es primo, activamos el flag
           esPrimo = 0; 
         }
         i++;
@@ -525,7 +525,7 @@ int main()
 
       // Si es primo, imprimirlo y aumentar el contador
       if (esPrimo == 1) 
-			{
+      {
         printf("%i ", num);
         // Aumentar el contador de primos encontrados
         contador++; 
