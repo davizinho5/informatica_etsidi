@@ -17,18 +17,13 @@ int main()
     {
         if(num % i == 0)
         {    
-            // Si encuentra un divisor, esPrimo pasa a valer 0
-            // Nunca podrÃ¡ valer otra cosa, porque multiplcar por 0
-            // siempre da 0
+            // Si encuentra un divisor, esPrimo pasa a valer 0 
+			// Y ya queda marcado que el número NO es primo          
             esPrimo = esPrimo * 0;     
         }
-        else
-        {
-            esPrimo = esPrimo * 1;     
-        }        
     }
     // Mostrar resultado
-    if (esPrimo) 
+    if (esPrimo == 1) 
     {
         printf("%i es un numero primo.\n", num);
     } 
