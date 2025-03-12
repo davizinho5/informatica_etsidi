@@ -1,25 +1,25 @@
 #include <stdio.h>
-// Busca e imprime el valor y el Ìndice del n˙mero m·s alto
+// Busca e imprime el valor y el √≠ndice del n√∫mero m√°s alto
 int main()
 {
     float numeros[5] = {2.1, 4.9, 0.51, 9.01, 4.3};
     int i;
     float maximo;
 
-    // Inicializar el m·ximo con el primer elemento del vector
+    // Inicializar el m√°ximo con el primer elemento del vector
     maximo = numeros[0];
 
-    // Recorrer el vector para encontrar el m·ximo
+    // Recorrer el vector para encontrar el m√°ximo
     for (i = 1; i < 5; i++) 
-	{
-		// Si encontramos nuevo m·ximo
+    {
+	// Si encontramos nuevo m√°ximo
         if (numeros[i] > maximo) 
-		{
-			// Actualizamos el valor
+	{
+            // Actualizamos el valor
             maximo = numeros[i];
         }
     }
     printf("El maximo es: %f", maximo);
     
- 	return 0;
+    return 0;
 }
