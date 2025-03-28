@@ -39,10 +39,6 @@ int main()
 }
 #+END_SRC
 
-#+RESULTS:
-| Lorem_ipsum_dolor_sit_amet | _consectetur_adipiscing_elit._Cras_euismod_orci_ac_porttitor_finibus._Curabitur_sed_tincidunt_est | _nec_mollis_lorem._Vestibulum_facilisis_dolor_sit_amet_faucibus_ultrices._Sed_pharetra_vel_erat_et_ornare._Duis_eu_lorem_non_leo_dictum_egestas._Integer_diam_arcu | _volutpat_ut_elit_vitae | _finibus_molestie_risus._Vivamus_sagittis_commodo_risus_vel_finibus._Vestibulum_vehicula_tortor_ut_ante_tincidunt | _non_tincidunt_turpis_sodales._Nam_orci_diam | _pulvinar_in_ante_a | _dignissim_pulvinar_magna._Mauris_massa_tortor | _fermentum_pretium_lobortis_sed | _luctus_vitae_tortor._Suspendisse_sagittis_augue_sit_amet_risus_molestie | _sed_dapibus_enim_vulputate._Sed_tempus_risus_vel_dolor_ornare | _eget_imperdiet_ligula_aliquam._Mauris_ac_auctor_lacus._Quisque_suscipit_interdum_rutrum._Sed_placerat_sit_amet_urna_in_vulputate._Nulla_facilisis_mi_nisi | _vel_pulvinar_odio_auctor_posuere. |
-
-
 
 * 2. Letras al revés
 
@@ -92,21 +88,7 @@ int main()
 {
   //Asignamos el texto a una variable char, sin definir la dimension
   //Usamos \ para escribir varias lineas
-  char texto[] = 
-"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras euismod\
- orci ac porttitor finibus. Curabitur sed tincidunt est, nec mollis\
- lorem. Vestibulum facilisis dolor sit amet faucibus ultrices. Sed\
- pharetra vel erat et ornare. Duis eu lorem non leo dictum\
- egestas. Integer diam arcu, volutpat ut elit vitae, finibus molestie\
- risus. Vivamus sagittis commodo risus vel finibus. Vestibulum\
- vehicula tortor ut ante tincidunt, non tincidunt turpis sodales. Nam\
- orci diam, pulvinar in ante a, dignissim pulvinar magna. Mauris massa\
- tortor, fermentum pretium lobortis sed, luctus vitae\
- tortor. Suspendisse sagittis augue sit amet risus molestie, sed\
- dapibus enim vulputate. Sed tempus risus vel dolor ornare, eget\
- imperdiet ligula aliquam. Mauris ac auctor lacus. Quisque suscipit\
- interdum rutrum. Sed placerat sit amet urna in vulputate. Nulla\
- facilisis mi nisi, vel pulvinar odio auctor posuere.";
+  char texto[] = "Vamos a practicar programacion mas a menudo.";
 
   // usaremos estas variables para marcar el inicio y el fin de una palabra
   int fin;
@@ -276,21 +258,7 @@ Escribe un programa que analice la frase del ejercicio anterior contando en núm
 
 int main()
 {
-  char frase[] = //Usamos \ para escribir varias lineas
-"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras euismod\
- orci ac porttitor finibus. Curabitur sed tincidunt est, nec mollis\
- lorem. Vestibulum facilisis dolor sit amet faucibus ultrices. Sed\
- pharetra vel erat et ornare. Duis eu lorem non leo dictum\
- egestas. Integer diam arcu, volutpat ut elit vitae, finibus molestie\
- risus. Vivamus sagittis commodo risus vel finibus. Vestibulum\
- vehicula tortor ut ante tincidunt, non tincidunt turpis sodales. Nam\
- orci diam, pulvinar in ante a, dignissim pulvinar magna. Mauris massa\
- tortor, fermentum pretium lobortis sed, luctus vitae\
- tortor. Suspendisse sagittis augue sit amet risus molestie, sed\
- dapibus enim vulputate. Sed tempus risus vel dolor ornare, eget\
- imperdiet ligula aliquam. Mauris ac auctor lacus. Quisque suscipit\
- interdum rutrum. Sed placerat sit amet urna in vulputate. Nulla\
- facilisis mi nisi, vel pulvinar odio auctor posuere.";
+  char frase[] = "Vamos a practicar programacion mas a menudo.";
   
   char vocales[5] = {'a', 'e', 'i', 'o', 'u'};
   int i, j; 
@@ -347,11 +315,11 @@ int main()
 #+end_src
 
 #+RESULTS:
-| a: | ********************************************************                              |
-| e: | *******************************************************************                   |
-| i: | ************************************************************************************* |
-| o: | *****************************************                                             |
-| u: | ****************************************************************                      |
+| a: |                               |
+| e: |                     |
+| i: |  |
+| o: |                                              |
+| u: |                       |
 
 
 * 6. Separa palabras
@@ -541,7 +509,7 @@ int main()
 #+BEGIN_SRC C
 #include <stdio.h>
 
-//Construya un programa que almacene en un vector los nombres de un grupo de n personas 
+// Construya un programa que almacene en un vector los nombres de un grupo de n personas 
 // busque la posición (primer nombre, segundo nombre...) del vector en la que se almacenó
 // el nombre de una persona que el usuario ingresa y comuniquelo. 
 // Si dicho nombre no está en el vector, el programa deberá informarlo. 
