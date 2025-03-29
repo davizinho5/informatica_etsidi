@@ -49,10 +49,10 @@ Escribe un programa que imprima al revés una palabra o frase introducida por te
 
 int main ()
 {
-  char palabra[12];
+  char palabra[15];
   int len, i;
   // Pide la palabra al usuario
-  printf("Escribe una palabra o frase (máximo 11 letras):\n");
+  printf("Escribe una palabra o frase (máximo 14 letras):\n");
   scanf("%11[^\n]", palabra);
   
   // Calcula la longitud de la cadena
@@ -75,55 +75,206 @@ int main ()
 #+END_SRC
 
 
-* 3. Gira palabras
+* 3. Separa palabras
 
-Escribe un programa que procese la frase del ejercicio 1. Como resultado, cada palabra de la frase debe de escribrila al revés.
+Escribe un programa que pida al usuario introducir una frase.
+Después. imprima cada palabra en una nueva línea.
 
 #+BEGIN_SRC C 
 #include <stdio.h>
 
-// NOTA: se recomienda usar una frase más sencilla para empezar a probar el código
-
-int main()
+int main() 
 {
-  //Asignamos el texto a una variable char, sin definir la dimension
-  //Usamos \ para escribir varias lineas
-  char texto[] = "Vamos a practicar programacion mas a menudo.";
+    char frase[200];
+    int i = 0;
 
-  // usaremos estas variables para marcar el inicio y el fin de una palabra
-  int fin;
-  int inicio=0;
-  int i = 0;
-  //Recorremos el texto hasta el final
-  while(texto[i] != '\0')
-  {
-    if(texto[i] == ' ') //Si encuentra un espacio
+    // Pedir la frase al usuario
+    printf("Ingrese una frase: ");
+    gets(frase);
+
+    // Recorrer la cadena e imprimir palabra por palabra
+    while (frase[i] != '\0') 
     {
-      // vamos de fin a inicio para imprimir al reves
-      fin = i-1;
-      while(fin >= inicio)
-      {
-        printf("%c", texto[fin]); //Imprime cada letra
-        fin--;
-      }
-      printf(" ");
-      inicio = i+1;
+        if ( (frase[i] == ' ') || (frase[i] == ',') || (frase[i] == '.') )
+        {
+            printf("\n"); // Salto de línea al encontrar un espacio
+        } else 
+        {
+            printf("%c", frase[i]);
+        }
+        i++;
     }
-    i++;
-  }
-  fin = i-1;
-  while(fin >= inicio)
-  {
-    printf("%c", texto[fin]); //Imprime cada letra
-    fin--;
-  }
-  
-  return 0;    
+
+    return 0;
 }
 #+END_SRC
 
 
-* 4. Sustituir string.h
+* 4. Pedir frase
+
+#+BEGIN_SRC C 
+#include <stdio.h>
+
+int main() 
+{
+    char frase[50];
+    int tieneEspacio = 0;
+
+    do 
+    {
+        tieneEspacio = 0; // Reiniciamos la bandera
+        
+        // Pedir la frase al usuario
+        printf("Ingrese una frase con varias palabras: ");
+        gets(frase);
+
+        // Verificar si hay al menos un espacio
+        for (int i = 0; frase[i] != '\0'; i++) 
+        {
+            if (frase[i] == ' ') 
+            {
+                tieneEspacio = 1;
+            }
+        }
+
+        // Si no hay espacios, pedir otra frase
+        if (!tieneEspacio) {
+            printf("Debe ingresar mas de una palabra. Intentelo nuevamente.\n");
+        }
+
+    } while (!tieneEspacio); // Se repite mientras no haya espacios
+
+    printf("Frase aceptada: %s", frase);
+
+    return 0;
+}
+#+END_SRC
+
+
+* 5. Convertir letras
+
+Escribe un programa que después de introducir una palabra convierta una de cada 2 letras, de mayúsculas a minúsculas, o viceversa. Siga pidiendo palabras hasta que se introduzca el caractrer 0 para terminar el programa. 
+
+#+BEGIN_SRC C 
+#include <stdio.h>
+
+int main() 
+{
+  char palabra[25]; // Vector para almacenar la palabra ingresada.
+  int i;
+
+  printf("Introduce una palabra (o 0 para terminar): ");
+  // Leer una palabra hasta 4 letras
+  scanf("%24s", palabra);
+      
+  while (palabra[0] != '0') 
+  {
+    // Convertir y alternar mayúsculas/minúsculas para cada letra.
+    i = 0;
+    while ( palabra[i] != '\0' ) 
+    {
+      // Cambiamos solo los caracteres en posiciones pares
+      if (i % 2 == 0) 
+      {
+        // Convertir a mayúscula si es minúscula.
+        if (palabra[i] >= 'a' && palabra[i] <= 'z') 
+        {
+          palabra[i] = palabra[i] - ('a' - 'A');
+        }
+        // Convertir a minúscula si es mayúscula.
+        else 
+        {
+          if (palabra[i] >= 'A' && palabra[i] <= 'Z') 
+          {
+            palabra[i] = palabra[i] + ('a' - 'A');
+          }
+        }
+      }
+      i++;
+    }
+
+    printf("Resultado: %s\n\n", palabra);
+    
+    printf("Introduce una palabra (o 0 para terminar): ");
+    // Leer una palabra hasta 4 letras
+    scanf("%24s", palabra);
+  }
+
+  printf("Programa terminado.\n");
+  return 0;
+}
+#+END_SRC
+
+
+* 6. Cuenta letras
+
+Escribe un programa que analice una frase contando en número de veces que aparece cada vocal. Al final del programa, se debe pintar en el terminal, para cada letra, una línea que contiene el mismo número de asteríscos que veces aparece esa vocal.
+
+#+BEGIN_SRC C 
+#include <stdio.h>
+
+int main()
+{
+  char frase[] = "Vamos a practicar programacion mas a menudo.";
+  
+  char vocales[5] = {'a', 'e', 'i', 'o', 'u'};
+  int i, j; 
+  int nLetra[5] = {0, 0, 0, 0, 0};  //Vector de resultados
+
+  // Cuenta las apariciones de cada vocal, y almacena resultados en nLetra
+  i = 0;
+  while (frase[i] != '\0') // Recorre la cadena de caracteres
+  {
+    switch(frase[i]) // Compara el caracter con las vocales
+    {
+      case 'a':
+      case 'A':
+        nLetra[0]++;
+      break;
+    
+      case 'e':
+      case 'E':
+        nLetra[1]++;
+      break;
+    
+      case 'i':
+      case 'I':
+        nLetra[2]++;
+      break;
+  
+      case 'o':
+      case 'O':
+        nLetra[3]++;
+      break;
+  
+      case 'u':
+      case 'U':
+        nLetra[4]++;
+      break;
+    }
+  // Avanzo en la frase  
+  i++; 
+  }
+  // Recorre el vector de resultados, y pinta asteriscos
+  // correspondientes a cada letra
+  for (i = 0; i < 5; i++)
+  { 
+    printf("%c: ", vocales[i]);
+    for (j = 1; j <= nLetra[i]; j++)
+    {
+      printf("*");
+    }
+    printf("\n");
+  }
+  
+  return 0;
+}
+#+end_src
+
+#+END_SRC
+
+
+* 7. Sustituir string.h
 
 Realice sus propios programas para suplir a las funciones: strlen(), strcpy(), strcat(), strcmp().
 
@@ -249,195 +400,139 @@ int main()
 }
 #+END_SRC
 
-* 5. Cuenta letras
 
-Escribe un programa que analice la frase del ejercicio anterior contando en número de veces que aparece cada vocal. Al final del programa, se debe pintar en el terminal, para cada letra, una línea que contiene el mismo númeor de asteríscos que veces aparece esa vocal.
+* 8. Encriptar texto
 
-#+begin_src C 
+En este ejercicio debes realizar un programa que encripte una cadena de caracteres empleando un número entero como clave de encriptación. En este programa el contenido de la cadena será tu correo electrónico de la UPM, y la clave se determinará a partir de tu número de matrícula. Escribe la cadena en el propio código).
+Debes calcular la suma de las cifras de tu número de matrícula. Si tu número de matrícula es impar, el programa debe asignar un signo negativo al resultado. Por ejemplo, si tu número de matrícula es 12345 el resultado de este paso debe ser -15, y si es 43210 el resultado es 10. Éste valor será la clave de encriptación.
+Además, define una cadena de caracteres y asígnale tu correo electrónico de la UPM, crea otra cadena para encriptar el correo. El programa recorre la cadena de caracteres sumando a cada carácter la clave de encriptación (con su signo) salvo a los puntos y a la @, que serán copiados sin cambios.
+Para finalizar, el programa debe mostrar en pantalla el correo original y el correo encriptado.
+
+#+BEGIN_SRC C 
 #include <stdio.h>
-
 int main()
 {
-  char frase[] = "Vamos a practicar programacion mas a menudo.";
-  
-  char vocales[5] = {'a', 'e', 'i', 'o', 'u'};
-  int i, j; 
-  int nLetra[5] = {0, 0, 0, 0, 0};  //Vector de resultados
-
-  // Cuenta las apariciones de cada vocal, y almacena resultados en nLetra
-  i = 0;
-  while (frase[i] != '\0') // Recorre la cadena de caracteres
+  char correo[] = "nombre.apellidos@upm.es", encriptado[] = "nombre.apellidos@upm.es";
+  int matricula = 12345, x, y, suma = 0, i;
+  x = matricula;
+  while(x > 0)
   {
-    switch(frase[i]) // Compara el caracter con las vocales
-    {
-      case 'a':
-      case 'A':
-        nLetra[0]++;
-      break;
-    
-      case 'e':
-      case 'E':
-        nLetra[1]++;
-      break;
-    
-      case 'i':
-      case 'I':
-        nLetra[2]++;
-      break;
-  
-      case 'o':
-      case 'O':
-        nLetra[3]++;
-      break;
-  
-      case 'u':
-      case 'U':
-        nLetra[4]++;
-      break;
-    }
-  // Avanzo en la frase  
-  i++; 
+    y = x % 10;
+    suma += y;
+    x /= 10;
   }
-  // Recorre el vector de resultados, y pinta asteriscos
-  // correspondientes a cada letra
-  for (i = 0; i < 5; i++)
-  { 
-    printf("%c: ", vocales[i]);
-    for (j = 1; j <= nLetra[i]; j++)
+  if (matricula % 2 != 0)
+    suma = - suma;
+  i = 0;
+  while (correo[i] != '\0')
+  {
+    if( (correo[i] != '.') && (correo[i] != '@') )
     {
-      printf("*");
+      encriptado[i] = correo[i] + suma;
     }
-    printf("\n");
+    else
+    {
+      encriptado[i] = correo[i];
+    }
+    i++;
   }
-  
+  encripta[i] = '\0';
+  printf("El correo original es %s y el encriptado es %s.\n", correo, encriptado);
+
   return 0;
 }
-#+end_src
-
-#+RESULTS:
-| a: |                               |
-| e: |                     |
-| i: |  |
-| o: |                                              |
-| u: |                       |
+#+END_SRC
 
 
-* 6. Separa palabras
+* 9. Mover letras en palabra
 
-Escribe un programa que pida al usuario introducir una frase de varias palabras. Pida una nueva frase si ha introducido una sola palabra. Después, imprima cada palabra en una nueva línea.
+Introduzca una palabra por teclado de 4 letras. Realice un programa que permita llevar la última letra al inicio y muestre por pantalla el resultado. Repítalo hasta recomponer nuevamente la palabra ingresada. (ejemplo: casa -> acas -> saca -> asac -> casa).
 
 #+BEGIN_SRC C 
 #include <stdio.h>
 
+#define TAM 5
+
 int main() 
 {
-    char frase[256];
-    int i, masdeunapalabra = 0;  // Cero significa que que no hay espacios, comas o puntos, luego es solo una palabra
+    char palabra[TAM], temp;
+    int i, ciclos = 1;
 
-    // Solicitar frase al usuario
+    printf("Introduzca una palabra: ");
+    scanf("%4s", palabra);
+  
     do 
     {
-        printf("Introduce una frase de varias palabras hasta 255 caracteres: ");
-        gets(frase);            // Leer la línea completa, incluyendo espacios
-
-        // Verificar si la frase contiene al menos un espacio, indicando múltiples palabras
-        i = 0;
-        while(frase[i] != '\0') 
-        {  
-            // Las palabras pueden separarse por espacios, comas o puntos.
-            if ( (frase[i] == ' ') || (frase[i] == ',') || (frase[i] == '.') ) 
-            {
-                masdeunapalabra = 1; // Se encontró un espacio
-                // break;            // Si aquí usamos break podemos ahorrar algunas iteraciones
-            }
-            i++;
-        }
-    
-        // Si no hay más de una palaba, sumimos que separada por espacio, coma o punto
-        if (masdeunapalabra == 0) 
+        // Mover la última letra al inicio
+        // Primero se hace una copia de la última letra para no perderla
+        temp = palabra[TAM - 2];
+        // Se mueven el resto de letras una posición
+        for (i = TAM - 2; i > 0; i--) 
         {
-            printf("Por favor, introduce más de una palabra.\n");
+            palabra[i] = palabra[i - 1];
         }
+        // Y se copia la letra guardada al principio en su posición
+        palabra[0] = temp;
 
-    } while (masdeunapalabra == 0); // Repetir mientras no haya separadores (solo una palabra)
+        // Incrementar el contador de ciclos
+        ciclos++;
+        printf("Ciclo %i: %s\n", ciclos, palabra);
 
-    // Imprimir cada palabra en una nueva línea
-    printf("Palabras ingresadas:\n");
-    i = 0;
-    while ( frase[i] != '\0' ) 
-    {
-        // Si encontramos un espacio, coma o punto cambiamos de linea
-        if ((frase[i] == ' ') || (frase[i] == ',') || (frase[i] == '.')) 
-        { 
-            printf("\n"); // Imprimir nueva línea para la siguiente palabra
-        } else 
-        {
-            printf("%c", frase[i]); // Imprimir caracter actual
-        }
-        i++;
-    }
+    // Continuar hasta que la palabra modificada sea igual a la original
+    } while (ciclos < TAM);
+
+    printf("La palabra '%s' fue recompuesta después de %i ciclos.\n", palabra, ciclos);
 
     return 0;
 }
 #+END_SRC
 
 
-* 7. Convertir letras
+#+BEGIN_SRC
+10.  Gira palabras
 
-Escribe un programa que después de introducir una palabra convierta una de cada 2 letras, de mayúsculas a minúsculas, o viceversa. Siga pidiendo palabras hasta que se introduzca el caractrer 0 para terminar el programa. 
-
-#+BEGIN_SRC C 
+Escribe un programa que procese la frase del ejercicio 1. Como resultado, cada palabra de la frase
+debe de escribrila al revés.
 #include <stdio.h>
 
-int main() 
-{
-  char palabra[25]; // Vector para almacenar la palabra ingresada.
-  int i;
+int main() {
+    char frase[100];
+    int i, inicio = 0, fin, temp, longitud = 0;
 
-  printf("Introduce una palabra (o 0 para terminar): ");
-  // Leer una palabra hasta 4 letras
-  scanf("%24s", palabra);
-      
-  while (palabra[0] != '0') 
-  {
-    // Convertir y alternar mayúsculas/minúsculas para cada letra.
-    i = 0;
-    while ( palabra[i] != '\0' ) 
-    {
-      // Cambiamos solo los caracteres en posiciones pares
-      if (i % 2 == 0) 
-      {
-        // Convertir a mayúscula si es minúscula.
-        if (palabra[i] >= 'a' && palabra[i] <= 'z') 
-        {
-          palabra[i] = palabra[i] - ('a' - 'A');
-        }
-        // Convertir a minúscula si es mayúscula.
-        else 
-        {
-          if (palabra[i] >= 'A' && palabra[i] <= 'Z') 
-          {
-            palabra[i] = palabra[i] + ('a' - 'A');
-          }
-        }
-      }
-      i++;
+    // Leer la frase del usuario
+    printf("Ingrese una frase: ");
+    scanf(" %[^\n]", frase); // Lee la línea completa
+
+    // Calcular la longitud de la frase
+    while (frase[longitud] != '\0') {
+        longitud++;
     }
 
-    printf("Resultado: %s\n\n", palabra);
-    
-    printf("Introduce una palabra (o 0 para terminar): ");
-    // Leer una palabra hasta 4 letras
-    scanf("%24s", palabra);
-  }
+    // Recorrer la frase y encontrar palabras
+    for (i = 0; i <= longitud; i++) {
+        if (frase[i] == ' ' || frase[i] == '\0') {
+            fin = i - 1;
+            // Invertir la palabra encontrada
+            while (inicio < fin) {
+                temp = frase[inicio];
+                frase[inicio] = frase[fin];
+                frase[fin] = temp;
+                inicio++;
+                fin--;
+            }
+            inicio = i + 1;
+        }
+    }
 
-  printf("Programa terminado.\n");
-  return 0;
+    // Imprimir la frase con palabras invertidas
+    printf("Frase con palabras invertidas: %s\n", frase);
+
+    return 0;
 }
 #+END_SRC
 
 
-* 8. Buscar nombre
+* 11. Buscar nombre
 
 Construya un programa que almacene en un vector los nombres de un grupo de n personas y que, a continuación, busque la posición (primer nombre, segundo nombre...) del vector en la que se almacenó el nombre de una persona que el usuario ingresa y comuniquelo. Si dicho nombre no está en el vector, el programa deberá informarlo. Separe los nombres del vector con comas. 
 
@@ -505,7 +600,7 @@ int main()
 }
 #+END_SRC
 
-  * Solución hecha en clase:
+  * Otra solución
 #+BEGIN_SRC C
 #include <stdio.h>
 
@@ -571,169 +666,11 @@ int main()
 #+END_SRC
 
 
-* 9. Mover letras en palabra
-
-Introduzca una palabra por teclado. Realice un programa que permita llevar la última letra al inicio. Repítalo hasta recomponer nuevamente la palabra ingresada. (ejemplo: casa -> acas -> saca -> asac -> casa).
-
-#+BEGIN_SRC C 
-#include <stdio.h>
-
-#define MAX_LONGITUD 20
-
-int main() 
-{
-    char palabra[MAX_LONGITUD], palabraModificada[MAX_LONGITUD], temp;
-    int longitud, i, ciclos = 0;
-
-    printf("Introduzca una palabra: ");
-    scanf("%s", palabra);
-
-    // Calcular la longitud de la palabra
-    longitud = 0;
-    while (palabra[longitud] != '\0')
-    {
-      longitud++;
-    }    
-    // Copiar la palabra original a palabraModificada para trabajar sobre ella
-    for (i = 0; i <= longitud; i++)
-    {
-      palabraModificada[i] = palabra[i];
-    }
-    
-    do 
-    {
-        // Mover la última letra al inicio
-        // Primero se hace una copia de la última letra para no perderla
-        temp = palabraModificada[longitud - 1];
-        // Se mueven el resto de letras una posición
-        for (i = longitud - 1; i > 0; i--) 
-        {
-            palabraModificada[i] = palabraModificada[i - 1];
-        }
-        // Y se copia la letra guardada al principio en su posición
-        palabraModificada[0] = temp;
-
-        // Incrementar el contador de ciclos
-        ciclos++;
-        printf("Ciclo %i: %s\n", ciclos, palabraModificada);
-
-    // Continuar hasta que la palabra modificada sea igual a la original
-    } while (ciclos < longitud);
-
-    printf("La palabra '%s' fue recompuesta después de %i ciclos.\n", palabra, ciclos);
-
-    return 0;
-}
-#+END_SRC
 
 
-* 10. Encriptar texto
+* 12. Palabra al revés
 
-En este ejercicio debes realizar un programa que encripte una cadena de caracteres empleando un número entero como clave de encriptación. En este programa el contenido de la cadena será tu correo electrónico de la UPM, y la clave se determinará a partir de tu número de matrícula. Todos los valores deben estar asignados dentro del código (no uses scanf o gets).
-Debes calcular la suma de las cifras de tu número de matrícula. Si tu número de matrícula es impar, el programa debe asignar un signo negativo al resultado. Por ejemplo, si tu número de matrícula es 12345 el resultado de este paso debe ser -15, y si es 43210 el resultado es 10. Éste valor será la clave de encriptación.
-Además, define una cadena de caracteres y asígnale tu correo electrónico de la UPM, crea otra cadena para encriptar el correo. El programa recorre la cadena de caracteres sumando a cada carácter la clave de encriptación (con su signo) salvo a los puntos y a la @, que serán copiados sin cambios.
-Para finalizar, el programa debe mostrar en pantalla el correo original y el correo encriptado.
-
-#+BEGIN_SRC C 
-#include <stdio.h>
-int main()
-{
-  char correo[] = "nombre.apellidos@upm.es", encriptado[] = "nombre.apellidos@upm.es";
-  int matricula = 12345, x, y, suma = 0, i;
-  x = matricula;
-  while(x > 0)
-  {
-    y = x % 10;
-    suma += y;
-    x /= 10;
-  }
-  if (matricula % 2 != 0)
-    suma = - suma;
-  i = 0;
-  while (correo[i] != '\0')
-  {
-    if( (correo[i] != '.') && (correo[i] != '@') )
-    {
-      encriptado[i] = correo[i] + suma;
-    }
-    else
-    {
-      encriptado[i] = correo[i];
-    }
-    i++;
-  }
-  encripta[i] = '\0';
-  printf("El correo original es %s y el encriptado es %s.\n", correo, encriptado);
-
-  return 0;
-}
-#+END_SRC
-
-Solución basada en estructuras:
-#+BEGIN_SRC C 
-#include <stdio.h>
-
-// Declarar una estructura con los datos necesarios
-typedef struct
-{
-  char correo[50];
-  int num_matricula;
-  char correo_encriptado[50];
-}mail_encriptado;
-
-int main () 
-{
-  // Declarar los datos del problema e inicializarlo
-  mail_encriptado alumno = {"nombre.apellidos@upm.es", 12345, " "};
-  
-  // Con el numero de matricula, calcular la clave
-  int clave = 0;
-  int copia_matricula = alumno.num_matricula;
-  // Separar los números
-  // Hacer la suma
-  while(copia_matricula > 0)
-  {
-    clave = clave + (copia_matricula%10);
-    copia_matricula = copia_matricula/10;
-  }
-  // Comprobar si impar
-     // Si impar, cambiar de signo
-  if(alumno.num_matricula%2 != 0)
-  {
-    clave = (-1)*clave;
-  }
-  printf("Clave: %i\n", clave);
-  
-  //Con correo y clave, calcular la cadena encriptada
-    // Recorrer la cadena
-  int i = 0;
-  while(alumno.correo[i] != '\0')
-  {
-    // Detectar si tengo una letra
-    if( (alumno.correo[i]>='a') && (alumno.correo[i]<='z') || (alumno.correo[i]>='A') && (alumno.correo[i]<='Z') )
-    {
-      //Si tengo letra,  Encripta
-      alumno.correo_encriptado[i] = alumno.correo[i] + clave;
-    }
-    else
-    {
-      // Si no, se copia
-      alumno.correo_encriptado[i] = alumno.correo[i];
-    }      
-    i++;
-  }
-  // Terminador de la cadena
-  alumno.correo_encriptado[i] = '\0';
-  
-  printf("Correo encriptado: %s", alumno.correo_encriptado);
-
-  return 0;
-}
-#+END_SRC
-
-* 11. Palabra al revés
-
-Escribe un programa que imprima al revés una palabra introducida por teclado. (ejemplo: =casa= se convierte en =asac=).
+Introduzca una palabra por teclado de 4 letras. Realice un programa que permita llevar la última letra al inicio y muestre por pantalla el resultado. Repítalo hasta recomponer nuevamente la palabra ingresada (ejemplo: casa ->\ acas\ ->\ saca\ ->\ asac\ ->\ casa).
 
 #+BEGIN_SRC C 
 #include <stdio.h>
@@ -789,4 +726,10 @@ int main ()
   return 0;
 }
 #+END_SRC
+
+#+END_SRC
+
+
+
+
 
