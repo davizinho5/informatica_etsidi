@@ -488,14 +488,16 @@ int main()
 #+END_SRC
 
 
-#+BEGIN_SRC
-10.  Gira palabras
+* 10.  Gira palabras
 
 Escribe un programa que procese la frase del ejercicio 1. Como resultado, cada palabra de la frase
 debe de escribrila al revés.
+
+#+BEGIN_SRC
 #include <stdio.h>
 
-int main() {
+int main() 
+{
     char frase[100];
     int i, inicio = 0, fin, temp, longitud = 0;
 
@@ -504,16 +506,20 @@ int main() {
     scanf(" %[^\n]", frase); // Lee la línea completa
 
     // Calcular la longitud de la frase
-    while (frase[longitud] != '\0') {
+    while (frase[longitud] != '\0') 
+    {
         longitud++;
     }
 
     // Recorrer la frase y encontrar palabras
-    for (i = 0; i <= longitud; i++) {
-        if (frase[i] == ' ' || frase[i] == '\0') {
+    for (i = 0; i <= longitud; i++) 
+    {
+        if (frase[i] == ' ' || frase[i] == '\0') 
+        {
             fin = i - 1;
             // Invertir la palabra encontrada
-            while (inicio < fin) {
+            while (inicio < fin) 
+            {
                 temp = frase[inicio];
                 frase[inicio] = frase[fin];
                 frase[fin] = temp;
@@ -534,7 +540,7 @@ int main() {
 
 * 11. Buscar nombre
 
-Construya un programa que almacene en un vector los nombres de un grupo de n personas y que, a continuación, busque la posición (primer nombre, segundo nombre...) del vector en la que se almacenó el nombre de una persona que el usuario ingresa y comuniquelo. Si dicho nombre no está en el vector, el programa deberá informarlo. Separe los nombres del vector con comas. 
+Construya un programa que almacene en un vector los nombres de un grupo de 4 personas. Separe los nombres del vector con comas. A continuación, pida un nombre y busque la posición (primer nombre, segundo nombre...) del vector en la que se almacena el mismo nombre, imprima la posición. Si dicho nombre no está en el vector, el programa deberá informarlo.
 
 #+BEGIN_SRC C 
 #include <stdio.h>
@@ -666,11 +672,9 @@ int main()
 #+END_SRC
 
 
+* 12. Palabras al revés
 
-
-* 12. Palabra al revés
-
-Introduzca una palabra por teclado de 4 letras. Realice un programa que permita llevar la última letra al inicio y muestre por pantalla el resultado. Repítalo hasta recomponer nuevamente la palabra ingresada (ejemplo: casa ->\ acas\ ->\ saca\ ->\ asac\ ->\ casa).
+Escribe un programa que imprima al revés una frase introducida por teclado. Las letras de cada palabra estarán en orden correcto, pero las palabras deben quedar en orden contrario (ejemplo: \texttt{Escuela de Ingenieros} se convierte en (\texttt{Ingenieros de Escuela}).
 
 #+BEGIN_SRC C 
 #include <stdio.h>
