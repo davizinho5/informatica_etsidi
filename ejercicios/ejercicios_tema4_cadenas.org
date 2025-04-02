@@ -496,7 +496,7 @@ int main()
 Escribe un programa que procese la frase del ejercicio 1. Como resultado, cada palabra de la frase
 debe de escribrila al revés.
 
-#+BEGIN_SRC
+#+BEGIN_SRC C
 #include <stdio.h>
 
 int main() 
