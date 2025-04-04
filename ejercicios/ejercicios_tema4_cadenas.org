@@ -126,9 +126,9 @@ int main()
         
         // Pedir la frase al usuario
         printf("Ingrese una frase con varias palabras: ");
-				gets(frase);
+	gets(frase);
 				
-				int i = 0;
+	int i = 0;
         // Verificar, hasta el final de la cadena, si hay algún un espacio
         while ( frase[i] != '\0') 
         {
