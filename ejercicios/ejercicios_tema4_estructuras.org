@@ -408,7 +408,7 @@ int main(void)
     // Nos movemos en la cadena
     i++;  
   }
-  if (analisis.media > 0)
+  if (cuenta_caracteres > 0)
   {
     analisis.media = analisis.media / cuenta_caracteres;  
   }
