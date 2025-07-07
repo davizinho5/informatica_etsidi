@@ -110,7 +110,93 @@ int main()
 
 Escribe un programa que analice el texto almacenado en un fichero representando el número de vocales que contiene mediante líneas de asteriscos. Este programa debe estar construido de manera similar al ejercicio planteado en el capítulo 4, empleando dos funciones, =cuentaLetra= y =pintaAsteriscos=. Puedes usar el fichero =lorem_ipsum.txt= como ejemplo.
 
-- Versión sin asignación dinámica de memoria (procesando carácter a carácter)
+#+BEGIN_SRC C
+#include <stdio.h>
+
+int main()
+{
+  FILE *pf;
+  char texto[1000];        // Tamaño suficiente para la longitud del fichero
+  int nVocales[5] = {0};   // Para contar el numero de aparciones de cada vocal
+  int i = 0, j = 0; 
+  
+  // Para mostrarlas en terminal en orden al finalizar el ejercicio
+  char vocales[5] = {'a', 'e', 'i', 'o', 'u'};
+ 
+  // Abrimos fichero
+  pf = fopen("lorem_ipsum.txt", "r");
+  if (pf == NULL)
+  {
+    printf("Error en apertura de fichero.\n");
+    return -1;
+  }
+  
+  // Leemos fichero y almacenamos en cadena de caracteres
+  while(fscanf(pf, "%c", &texto[i]) != EOF)
+  {
+    ++i;
+  }
+    
+  //Cerramos la cadena de caracteres, lo usaremos después para buscar el final
+  texto[i] = '\0';
+
+  // Recorremos texto contando vocales
+  j = 0;
+  while (texto[j] != '\0')
+  {
+	switch(texto[j]) // Compara el caracter con las vocales
+    {
+      case 'a':
+      case 'A':
+        nVocales[0]++;
+      break;
+    
+      case 'e':
+      case 'E':
+        nVocales[1]++;
+      break;
+    
+      case 'i':
+      case 'I':
+        nVocales[2]++;
+      break;
+  
+      case 'o':
+      case 'O':
+        nVocales[3]++;
+      break;
+  
+      case 'u':
+      case 'U':
+        nVocales[4]++;
+      break;
+    }
+    j++;
+  }
+
+  for (i = 0; i < 5; i++)
+  { 
+    // Recorre el vector de resultados, y pinta asteriscos
+    // correspondientes a cada letra
+    printf("%c: %i ", vocales[i], nVocales[i]);
+    //pintaAsteriscos(nVocales[i]);
+    if (nVocales[i] > 0)
+    {
+      for (j = 1; j <= nVocales[i]; j++)
+      {
+        printf("*");        
+      }
+    }
+    printf("\n");
+  }
+ 
+  fclose(pf);
+  return 0;
+}
+#+END_SRC
+
+
+Otra solución algo más difícil de entender, pero igual de válida: 
 #+BEGIN_SRC C
 #include <stdio.h>
 
