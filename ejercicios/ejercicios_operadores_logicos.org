@@ -10,7 +10,7 @@ int main()
 
     // Ejercicio 1: Determinar si ambos números son positivos
     printf("Ejercicio 1: Introduzca dos números enteros: ");
-    scanf("%i %i", &num1, &num2);
+    scanf("%d %d", &num1, &num2);
     if (num1 > 0 && num2 > 0) {
         printf("Ambos números son positivos.\n");
     } else {
@@ -28,7 +28,7 @@ int main()
 {
     int edad;
     printf("\nEjercicio 2: Introduzca la edad de la persona: ");
-    scanf("%i", &edad);
+    scanf("%d", &edad);
     if (edad >= 13 && edad <= 19) 
     {
         printf("La persona es un adolescente.\n");
@@ -48,7 +48,7 @@ int main()
 {
     int num;
     printf("\nEjercicio 3: Introduzca un número entero: ");
-    scanf("%i", &num);
+    scanf("%d", &num);
     if (num % 3 == 0 || num % 5 == 0) 
     {
         printf("El número es divisible por 3 o por 5.\n");
@@ -67,7 +67,7 @@ int main()
 {
     int num;
     printf("\nEjercicio 4: Introduzca un número entero: ");
-    scanf("%i", &num);
+    scanf("%d", &num);
     if ((num >= 1 && num <= 100) || num == 0) 
     {
         printf("El número está en el rango de 1 a 100 o es 0.\n");
@@ -86,7 +86,7 @@ int main()
 {
     int num;
     printf("\nEjercicio 5: Introduzca un número entero: ");
-    scanf("%i", &num);
+    scanf("%d", &num);
     if (num % 2 == 0 && num > 10) 
     {
         printf("El número es par y mayor que 10.\n");
