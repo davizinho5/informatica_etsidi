@@ -12,9 +12,9 @@ int main()
   
   suma = sumaVector(vals, 9, &max, &media);
 
-  printf("La suma es %i.\n", suma);
+  printf("La suma es %d.\n", suma);
   printf("La media es %f.\n", media);
-  printf("El valor maximo del vector es %i.\n", max);
+  printf("El valor maximo del vector es %d.\n", max);
     
   return 0;
 }
@@ -109,7 +109,7 @@ int main()
 
   len = stringLength(mensaje);
   
-  printf("Longitud %i\n", len);
+  printf("Longitud %d\n", len);
 
   return 0;
 }
@@ -145,7 +145,7 @@ int main()
 
   len = stringLength(mensaje);
   
-  printf("Longitud %i\n", len);
+  printf("Longitud %d\n", len);
 
   return 0;
 }
