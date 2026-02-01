@@ -95,7 +95,7 @@ int main()
         }
       }
     }
-    printf("Caracteres: %i \t Palabras: %i \t Líneas: %i.\n", iChar, iWord, iLine);
+    printf("Caracteres: %d \t Palabras: %d \t Líneas: %d.\n", iChar, iWord, iLine);
 
     fclose(pf);
   }
@@ -178,7 +178,7 @@ int main()
   { 
     // Recorre el vector de resultados, y pinta asteriscos
     // correspondientes a cada letra
-    printf("%c: %i ", vocales[i], nVocales[i]);
+    printf("%c: %d ", vocales[i], nVocales[i]);
     //pintaAsteriscos(nVocales[i]);
     if (nVocales[i] > 0)
     {
@@ -246,7 +246,7 @@ int main()
   { 
     // Recorre el vector de resultados, y pinta asteriscos
     // correspondientes a cada letra
-    printf("%c: %i ", vocales[i], nVocales[i]);
+    printf("%c: %d ", vocales[i], nVocales[i]);
     //pintaAsteriscos(nVocales[i]);
     if (nVocales[i] > 0)
     {
@@ -436,7 +436,7 @@ int main()
   {
     while (!feof(pdat))
     {
-      fscanf(pdat, “%i %i %s %i”, &planta, &num, hab, &frec );
+      fscanf(pdat, “%d %d %s %d”, &planta, &num, hab, &frec );
       if(strcmp(hab, “simple”) == 0 )
       {
         acuS = acuS + frec;
@@ -456,7 +456,7 @@ int main()
   }
   else
   {
-    fprintf(putil, “simple %i \n cuádruple %i”, acuS, acuC);
+    fprintf(putil, “simple %d \n cuádruple %d”, acuS, acuC);
   }
   
   fclose (putil);
@@ -515,12 +515,12 @@ int main()
     }
     else
     {
-      while(fscanf(plectura, "%i %i %s %i", &habitacion.planta, &habitacion.num, 
+      while(fscanf(plectura, "%d %d %s %d", &habitacion.planta, &habitacion.num, 
                                             habitacion.tipo, &habitacion.freq  ) != EOF)
       {
        //guarda la suma de frecuencia de utilización
        //semanal de las habitaciones simples y cuádruples        
-        printf("%i %i %s %i\n", habitacion.planta, habitacion.num, habitacion.tipo, habitacion.freq);
+        printf("%d %d %s %d\n", habitacion.planta, habitacion.num, habitacion.tipo, habitacion.freq);
         // recorrer cadena "simple" para saber si son iguales
         while( (habitacion.tipo[i] != '\0') && (simple[i] != '\0') && (simple[i] == habitacion.tipo[i]) )
         {
@@ -544,8 +544,8 @@ int main()
         }  
         i=0;
       }  
-       printf("Suma simple: %i , suma cuadruple: %i\n", suma_sim, suma_cuad);
-      fprintf(pescritura, "Suma simple: %i , suma cuadruple: %i\n", suma_sim, suma_cuad);
+       printf("Suma simple: %d , suma cuadruple: %d\n", suma_sim, suma_cuad);
+      fprintf(pescritura, "Suma simple: %d , suma cuadruple: %d\n", suma_sim, suma_cuad);
 
 
     }
@@ -602,11 +602,11 @@ int main()
   else
   {
       fprintf(pescritura, "mes, dia, anho, valor\n", medidas[i].num_estacion, medidas[i].dia, medidas[i].mes, medidas[i].anho, medidas[i].valor);      
-      while(fscanf(plectura, "%i;%i;%i;%i;%i", &medidas[i].num_estacion, &medidas[i].dia, &medidas[i].mes, &medidas[i].anho, &medidas[i].valor) != EOF)
+      while(fscanf(plectura, "%d;%d;%d;%d;%d", &medidas[i].num_estacion, &medidas[i].dia, &medidas[i].mes, &medidas[i].anho, &medidas[i].valor) != EOF)
       {     
         if(moratalaz == medidas[i].num_estacion)
         {
-          fprintf(pescritura, "%i,%i,%i,%i\n", medidas[i].dia, medidas[i].mes, medidas[i].anho, medidas[i].valor);
+          fprintf(pescritura, "%d,%d,%d,%d\n", medidas[i].dia, medidas[i].mes, medidas[i].anho, medidas[i].valor);
         }
         i++;
       }       
