@@ -73,9 +73,9 @@ int main()
   
   suma = sumaVector(vals, 9, &max, &media);
 
-  printf("La suma es %i.\n", suma);
+  printf("La suma es %d.\n", suma);
   printf("La media es %f.\n", media);
-  printf("El valor maximo del vector es %i.\n", max);
+  printf("El valor maximo del vector es %d.\n", max);
     
   return 0;
 }
@@ -120,9 +120,9 @@ int incHora(int *h, int *m, int inc);
 int main()
 {
   int cambio, hora, min, inc;
-  scanf("%i %i %i", &hora, &min, &inc);
+  scanf("%d %d %d", &hora, &min, &inc);
   cambio = incHora(&hora, &min, inc);
-  printf("Cambio:%i H:%i M:%i", cambio, hora, min);
+  printf("Cambio:%d H:%d M:%d", cambio, hora, min);
 
   return 0;
 }
@@ -257,7 +257,7 @@ int main()
   int res;
   scanf("%f %f", &x, &y);
   res = operaciones(x, y, &s, &r, &p, &d);
-  printf("Suma: %f Resta: %f Producto: %f División: %f MayorMenor:%i", s, r, p, d, res);
+  printf("Suma: %f Resta: %f Producto: %f División: %f MayorMenor:%d", s, r, p, d, res);
 
 	return 0;
 }
@@ -323,7 +323,7 @@ int main()
 
   detPunto(p1, p2, &dist, &cuad1, &cuad2);
   
-  printf("%f %i %i", dist, cuad1, cuad2);
+  printf("%f %d %d", dist, cuad1, cuad2);
 }
 
 void detPunto(float p1[], float p2[], float *dist, int *cuad1, int *cuad2)
@@ -458,7 +458,7 @@ int main()
 {
   punto p1 = {0, 0};
   char tecla;
-  printf("(%i, %i)\n", p1.x, p1.y);
+  printf("(%d, %d)\n", p1.x, p1.y);
   while (tecla != 'q')
     {
       fflush(stdin);
@@ -491,7 +491,7 @@ int main()
 	  break;
 	}
 
-      printf("(%i, %i)\n", p1.x, p1.y);
+      printf("(%d, %d)\n", p1.x, p1.y);
     }
   return 0;
 }
