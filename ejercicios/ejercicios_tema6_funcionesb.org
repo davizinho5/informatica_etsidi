@@ -185,7 +185,7 @@ int main()
 
     // Mostrar resultado
     printf("Nombre de la señal: %s\n", mi_audio.nombre);
-    printf("Número de muestras: %i\n", mi_audio.n_muestras);
+    printf("Número de muestras: %d\n", mi_audio.n_muestras);
     printf("Mediana de las muestras: %.2f\n", mediana);
 
     return 0;
@@ -312,7 +312,7 @@ empleado pedirDatos()
   scanf("%c", &persona.categoria);
   
   printf("\nIntroduzca horas trabajadas: ");
-  scanf("%i", &persona.horas);
+  scanf("%d", &persona.horas);
   
   return persona;
 }
@@ -382,7 +382,7 @@ int main()
         
         if (numSustituciones > 0) 
         {
-            printf("Numero de sustituciones realizadas: %i\n", numSustituciones);
+            printf("Numero de sustituciones realizadas: %d\n", numSustituciones);
         } 
         else 
         {
@@ -391,7 +391,7 @@ int main()
 
         // Preguntar si desea repetir el proceso
         printf("Desea introducir una nueva frase? Pulse cero para salir. ");
-        scanf("%i", &repetir);
+        scanf("%d", &repetir);
     } while (repetir !== 0);
 
     return 0;
@@ -408,7 +408,7 @@ int modificaT(char texto[])
     scanf("%c", &letra);
 
     // Solicitar la frase al usuario
-    printf("Introduce una frase (max %i caracteres): ", MAX_FRASE - 1);
+    printf("Introduce una frase (max %d caracteres): ", MAX_FRASE - 1);
     scanf("%99[^\n]s", frase);
 
     // Recorrer el texto y realizar las sustituciones
@@ -509,12 +509,12 @@ void generaInventario(INV inventario[], int numero_items)
     int i;
     for (i = 0; i < numero_items; i++) 
     {
-        printf("Introduce los datos del producto %i\n", i + 1);
+        printf("Introduce los datos del producto %d\n", i + 1);
         printf("Código del producto: ");
         scanf("%s", inventario[i].cod);
 
         printf("Cantidad en almacén: ");
-        scanf("%i", &inventario[i].stock);
+        scanf("%d", &inventario[i].stock);
         printf("Precio por unidad: ");
         scanf("%f", &inventario[i].precio);
     }
@@ -527,7 +527,7 @@ float calculaInmovilizado(INV producto)
 
     if (producto.stock <= 10) 
     {
-        printf("El producto con código %s necesita ser pedido. Stock actual: %i\n", producto.cod, producto.stock);
+        printf("El producto con código %s necesita ser pedido. Stock actual: %d\n", producto.cod, producto.stock);
     }
 
     return inmovilizado;
