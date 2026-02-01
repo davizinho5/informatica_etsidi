@@ -20,7 +20,7 @@ int main()
   int *p;
 
   printf("Nº datos? ");
-  scanf("%i", &n);
+  scanf("%d", &n);
   
   // Reservamos n direcciones de memoria del tamaño de un int. El
   // resultado de malloc es la dirección inicial, que almacenamos en
@@ -383,7 +383,7 @@ int main()
   // Leo datos y almaceno información en variables
   for (i = 0; i < N;i++)
   {
-    scanf("%i;%f;%f;%f", estacion + i, lon + i, lat + i, alt + i);
+    scanf("%d;%f;%f;%f", estacion + i, lon + i, lat + i, alt + i);
   }
   // Localizo máximos y mínimos.
   iLatMax = maximo(lat, N);
