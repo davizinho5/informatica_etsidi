@@ -65,7 +65,7 @@ int main ()
       }
       // Cerramos fichero
       fclose(fDestino);
-      printf("\nCopia finalizada con exito, se han hecho %i cambios.\n", cambios);
+      printf("\nCopia finalizada con exito, se han hecho %d cambios.\n", cambios);
       
       return 0;
     }
@@ -412,7 +412,7 @@ empleado pedirDatos()
   scanf("%c", &persona.categoria);
   
   printf("\nIntroduzca horas trabajadas: ");
-  scanf("%i", &persona.horas);
+  scanf("%d", &persona.horas);
   
   return persona;
 }
@@ -476,7 +476,7 @@ int main()
 
     do {
         // Solicitar la frase al usuario
-        printf("Introduce una frase (max %i caracteres): ", MAX_FRASE - 1);
+        printf("Introduce una frase (max %d caracteres): ", MAX_FRASE - 1);
         scanf("%99[^\n]s", frase);
 
         // Modificar la frase
@@ -487,7 +487,7 @@ int main()
         
         if (numSustituciones > 0) 
         {
-            printf("Numero de sustituciones realizadas: %i\n", numSustituciones);
+            printf("Numero de sustituciones realizadas: %d\n", numSustituciones);
         } 
         else 
         {
@@ -615,12 +615,12 @@ void generaInventario(INV inventario[], int numero_items)
     int i;
     for (i = 0; i < numero_items; i++) 
     {
-        printf("Introduce los datos del producto %i\n", i + 1);
+        printf("Introduce los datos del producto %d\n", i + 1);
         printf("Código del producto: ");
         scanf("%s", inventario[i].cod);
 
         printf("Cantidad en almacén: ");
-        scanf("%i", &inventario[i].stock);
+        scanf("%d", &inventario[i].stock);
         printf("Precio por unidad: ");
         scanf("%f", &inventario[i].precio);
     }
@@ -633,7 +633,7 @@ float calculaInmovilizado(INV producto)
 
     if (producto.stock <= 10) 
     {
-        printf("El producto con código %s necesita ser pedido. Stock actual: %i\n", producto.cod, producto.stock);
+        printf("El producto con código %s necesita ser pedido. Stock actual: %d\n", producto.cod, producto.stock);
     }
 
     return inmovilizado;
@@ -687,7 +687,7 @@ int main()
     fscanf(archivo, "%9s", datos.nombre);
     
     // Leer el número de muestras
-    fscanf(archivo, "%i", &datos.n_muestras);
+    fscanf(archivo, "%d", &datos.n_muestras);
 
     // Leer las muestras
     int i;
@@ -700,7 +700,7 @@ int main()
 
     // Mostrar los datos leidos
     printf("Nombre de la señal: %s\n", datos.nombre);
-    printf("Número de muestras: %i\n", datos.n_muestras);
+    printf("Número de muestras: %d\n", datos.n_muestras);
     printf("Muestras:\n");
     
     for (i = 0; i < datos.n_muestras; i++) 
