@@ -62,7 +62,7 @@ int main()
   {
     for(j = 0; j < 3; j++)
     {
-      printf("%i\t", r[i][j]);
+      printf("%d\t", r[i][j]);
     }
     printf("\n"); // Un salto de linea tras cada fila
   }
@@ -114,7 +114,7 @@ int main()
   {
     for (j = 0; j < 3; j++) // Columnas
     {
-      printf("%i\t", tp[i][j]);
+      printf("%d\t", tp[i][j]);
     }
     printf("\n");//Salto de línea al acabar una fila
   }
