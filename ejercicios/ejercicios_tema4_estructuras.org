@@ -53,7 +53,7 @@ int main()
     cuadrante = 0; // Punto en un eje   
   }
  
-  printf("El punto 1 está en el cuadrante %i.\n", cuadrante);
+  printf("El punto 1 está en el cuadrante %d.\n", cuadrante);
   
   if (b.x > 0 && b.y > 0)
   {
@@ -76,7 +76,7 @@ int main()
     cuadrante = 0; // Punto en un eje   
   }
 
-  printf("El punto 2 está en el cuadrante %i.\n", cuadrante);
+  printf("El punto 2 está en el cuadrante %d.\n", cuadrante);
 
   printf("La distancia entre los puntos es %f.\n", sqrt(pow(a.x - b.x, 2) + pow(a.y - b.y, 2)));
   
@@ -128,7 +128,7 @@ int main()
                      //estructuras, cuyos componentes son de tipo punto.
 
   printf("Dime el número de puntos (< 100).\t");
-  scanf("%i", &n);
+  scanf("%d", &n);
   
   // Pido datos al usuario
   for (i = 0; i < n; i++)
@@ -224,7 +224,7 @@ int main()
   }
   dt.hour = t2.hour - t1.hour;
   
-  printf("%i:%i:%i", dt.hour, dt.min, dt.sec);
+  printf("%d:%d:%d", dt.hour, dt.min, dt.sec);
   
   return 0;
 }
@@ -280,7 +280,7 @@ int main()
     printf("Segundo apellido: \t");
     scanf("%s", contactos[i].apellido2);
     printf("Fecha de nacimiento (dia/mes/año): \t");
-    scanf("%i/%i/%i", &contactos[i].fechaNac.d, &contactos[i].fechaNac.m, &contactos[i].fechaNac.a);
+    scanf("%d/%d/%d", &contactos[i].fechaNac.d, &contactos[i].fechaNac.m, &contactos[i].fechaNac.a);
   }
 
   // Comparamos las fechas de los contactos
@@ -323,17 +323,17 @@ int main()
   {
     case -1:
       printf("%s %s %s\t", contactos[0].nombre, contactos[0].apellido1, contactos[0].apellido2);
-      printf("(%i/%i/%i) \n", contactos[0].fechaNac.d, contactos[0].fechaNac.m, contactos[0].fechaNac.a);   
+      printf("(%d/%d/%d) \n", contactos[0].fechaNac.d, contactos[0].fechaNac.m, contactos[0].fechaNac.a);   
       break;
     case 1:
       printf("%s %s %s\t", contactos[1].nombre, contactos[1].apellido1, contactos[1].apellido2);
-      printf("(%i/%i/%i) \n", contactos[1].fechaNac.d, contactos[1].fechaNac.m, contactos[1].fechaNac.a);
+      printf("(%d/%d/%d) \n", contactos[1].fechaNac.d, contactos[1].fechaNac.m, contactos[1].fechaNac.a);
       break;
     case 0:
       printf("%s %s %s\t", contactos[0].nombre, contactos[0].apellido1, contactos[0].apellido2);
-      printf("(%i/%i/%i) \n", contactos[0].fechaNac.d, contactos[0].fechaNac.m, contactos[0].fechaNac.a); 
+      printf("(%d/%d/%d) \n", contactos[0].fechaNac.d, contactos[0].fechaNac.m, contactos[0].fechaNac.a); 
       printf("%s %s %s\t", contactos[1].nombre, contactos[1].apellido1, contactos[1].apellido2);
-      printf("(%i/%i/%i) \n", contactos[1].fechaNac.d, contactos[1].fechaNac.m, contactos[1].fechaNac.a);      
+      printf("(%d/%d/%d) \n", contactos[1].fechaNac.d, contactos[1].fechaNac.m, contactos[1].fechaNac.a);      
       break;
   }
   
@@ -413,9 +413,9 @@ int main(void)
     analisis.media = analisis.media / cuenta_caracteres;  
   }
   
-  printf("\n Num vocales: %i", analisis.num_vocal);  
-  printf("\n Num contantes: %i", analisis.num_cons);  
-  printf("\n Num otros caracteres: %i", analisis.num_carac_esp);  
+  printf("\n Num vocales: %d", analisis.num_vocal);  
+  printf("\n Num contantes: %d", analisis.num_cons);  
+  printf("\n Num otros caracteres: %d", analisis.num_carac_esp);  
   printf("\n Media Ascii: %f", analisis.media);  
   
   return 0;
@@ -447,11 +447,11 @@ int main ()
   int i;
   for(i=0; i<N; i++)
   {
-    printf("\nIntroduzca los datos del empleado numero %i.", i+1);
+    printf("\nIntroduzca los datos del empleado numero %d.", i+1);
     printf("\nNombre: \n");
     scanf("%s", personal[i].nombre);
     printf("\nSalario anual: \n");
-    scanf("%i", &personal[i].salario);
+    scanf("%d", &personal[i].salario);
     printf("\nHoras por semana: \n");
     scanf("%f", &personal[i].horas);
     // 365 días al año, 30 de vacaciones y 15 festivos, quedarían unos 320 días
@@ -459,7 +459,7 @@ int main ()
     // Calcular el sueldo por hora 
     personal[i].sueldo_hora = personal[i].salario / ((personal[i].horas/7)*320);
     
-    printf("%s %i %.2f %.2f\n", personal[i].nombre, personal[i].salario, personal[i].horas, personal[i].sueldo_hora);
+    printf("%s %d %.2f %.2f\n", personal[i].nombre, personal[i].salario, personal[i].horas, personal[i].sueldo_hora);
     
   } 
   // Comparar sueldo por hora
@@ -482,9 +482,9 @@ int main ()
   }
     
   // Imprimir mayor
-  printf("\nMayor: %i, %s\n", mayor, personal[mayor].nombre);
+  printf("\nMayor: %d, %s\n", mayor, personal[mayor].nombre);
   // Imprimir menor  
-  printf("\nMenor: %i, %s\n", menor, personal[menor].nombre);
+  printf("\nMenor: %d, %s\n", menor, personal[menor].nombre);
       
   return 0;
 }
