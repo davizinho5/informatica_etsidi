@@ -62,7 +62,7 @@ int main()
   int days, years, weeks;
 
   printf("Escriba un numeros grande de dias:\n");
-  scanf("%i", &days);
+  scanf("%d", &days);
   
   years = days/365; 
   // Nos quedamos con el resto de la division entera
@@ -72,9 +72,9 @@ int main()
   // Dias totales menos los que son años y semanas
   days = days - ((years*365) + (weeks*7));
 
-  printf("Anyos: %i\n", years);
-  printf("Semanas: %i\n", weeks);
-  printf("Dias: %i \n", days);
+  printf("Anyos: %d\n", years);
+  printf("Semanas: %d\n", weeks);
+  printf("Dias: %d \n", days);
 
   return 0;
 }
@@ -91,7 +91,7 @@ int main()
   int x, u, d, c;
 
   printf("Dime un número entero.\n");
-  scanf("%i", &x);
+  scanf("%d", &x);
 
   // Las unidades son el resto de dividir por 10.
   u = x % 10;
@@ -104,7 +104,7 @@ int main()
   x = x / 10;
   c = x % 10;
 
-  printf("Centenas %i, Decenas %i, Unidades %i\n", c, d, u);
+  printf("Centenas %d, Decenas %d, Unidades %d\n", c, d, u);
 
   return 0;
 } 
@@ -145,15 +145,15 @@ int main()
 {
   int a, b;
   printf("Escriba 2 numeros enteros:\n");
-  scanf("%i", &a);
-  scanf("%i", &b);  
+  scanf("%d", &a);
+  scanf("%d", &b);  
 
   // Como el resultado de una comparación es 1 (true) o 0 (false)
   // Podemos usar el 1 (true) para sumar el número de ochos.
   int resultado = (a == 8);
   resultado = resultado + (b == 8);
 	
-  printf("%i", resultado);
+  printf("%d", resultado);
 	
   return 0;
 }
@@ -249,13 +249,13 @@ int main()
   float b;
 
   printf("Dime un número entero.\n");
-  scanf("%i", &a);
+  scanf("%d", &a);
   
   printf("Dime un número real.\n");
   scanf("%f", &b);
 
   //La funcion valor absoluto es distinta para números enteros y números reales	
-  printf("Entero: %i.\n", abs(a));
+  printf("Entero: %d.\n", abs(a));
   printf("Real: %f.\n", fabs(b));
 
   return 0;
@@ -319,13 +319,13 @@ int main()
 int main()
 {
   printf("Los códigos ASCII de las vocales son:\n");
-  // Usando %i se imprime un char como entero.
+  // Usando %d se imprime un char como entero.
   // El código \t inserta un tabulador.
-  printf("a: %i\t", 'a');
-  printf("e: %i\t", 'e');
-  printf("i: %i\t", 'i');
-  printf("o: %i\t", 'o');
-  printf("u: %i\n", 'u'); 
+  printf("a: %d\t", 'a');
+  printf("e: %d\t", 'e');
+  printf("i: %d\t", 'i');
+  printf("o: %d\t", 'o');
+  printf("u: %d\n", 'u'); 
   
   return 0;
 }
