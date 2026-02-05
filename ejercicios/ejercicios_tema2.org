@@ -51,35 +51,28 @@ int main()
 } 
 #+END_SRC
 
+* Conversión de temperatura
+Escriba un programa para convertir de grados centígrados a grados Fahrenheit ($T_F = 9/5 * T_C + 32$)
 
-* Conversión días en años
-Escribir un programa convierta un número de días dado por el usuario, y lo convierta en años, semanas y días. 
 #+BEGIN_SRC C
-#include <stdio.h> 
+#include <stdio.h>
 
 int main()
 {
-  int days, years, weeks;
+  float tempC, tempF;
+        
+  printf("Escriba una temperatura en grados centigrados\n");
+  scanf("%f", &tempC);
 
-  printf("Escriba un numeros grande de dias:\n");
-  scanf("%d", &days);
-  
-  years = days/365; 
-  // Nos quedamos con el resto de la division entera
-  // y lo dividimos por 7, para tener semanas
-  weeks = (days % 365)/7;
-  
-  // Dias totales menos los que son años y semanas
-  days = days - ((years*365) + (weeks*7));
-
-  printf("Anyos: %d\n", years);
-  printf("Semanas: %d\n", weeks);
-  printf("Dias: %d \n", days);
-
+  // La clave está en usar 9.0 y 5.0 para que la división sea de números reales. 
+  // Si escribimos 9/5 estamos indicando una división de números enteros.
+  tempF = (9.0 / 5.0) * tempC + 32;
+        
+  printf("%.2f grados centigrados son %.2f grados Fahrenheit\n", tempC, tempF);
+   
   return 0;
 }
 #+END_SRC
-
 
 * Cifras de un número entero
 Escriba un programa que, a partir de un número entero introducido por el usuario, muestre en pantalla las centenas, decenas y unidades (en este orden).
@@ -111,53 +104,35 @@ int main()
 #+END_SRC
 
 
-* Conversión de temperatura
-Escriba un programa para convertir de grados centígrados a grados Fahrenheit ($T_F = 9/5 * T_C + 32$)
-
+* Conversión días en años
+Escribir un programa convierta un número de días dado por el usuario, y lo convierta en años, semanas y días. 
 #+BEGIN_SRC C
-#include <stdio.h>
+#include <stdio.h> 
 
 int main()
 {
-  float tempC, tempF;
-        
-  printf("Escriba una temperatura en grados centigrados\n");
-  scanf("%f", &tempC);
+  int days, years, weeks;
 
-  // La clave está en usar 9.0 y 5.0 para que la división sea de números reales. 
-  // Si escribimos 9/5 estamos indicando una división de números enteros.
-  tempF = (9.0 / 5.0) * tempC + 32;
-        
-  printf("%.2f grados centigrados son %.2f grados Fahrenheit\n", tempC, tempF);
-   
+  printf("Escriba un numeros grande de dias:\n");
+  scanf("%d", &days);
+  
+  years = days/365; 
+  // Nos quedamos con el resto de la division entera
+  // y lo dividimos por 7, para tener semanas
+  weeks = (days % 365)/7;
+  
+  // Dias totales menos los que son años y semanas
+  days = days - ((years*365) + (weeks*7));
+
+  printf("Anyos: %d\n", years);
+  printf("Semanas: %d\n", weeks);
+  printf("Dias: %d \n", days);
+
   return 0;
 }
 #+END_SRC
 
 
-* Comparaciones (difícil tener la idea)
-Escribir un programa que lea 2 números enteros e imprima: un 1 si uno de los números es igual a 8; 2 si los 2 números son iguales al 8.
-
-#+BEGIN_SRC C
-#include <stdio.h>
-
-int main()
-{
-  int a, b;
-  printf("Escriba 2 numeros enteros:\n");
-  scanf("%d", &a);
-  scanf("%d", &b);  
-
-  // Como el resultado de una comparación es 1 (true) o 0 (false)
-  // Podemos usar el 1 (true) para sumar el número de ochos.
-  int resultado = (a == 8);
-  resultado = resultado + (b == 8);
-	
-  printf("%d", resultado);
-	
-  return 0;
-}
-#+END_SRC
 
 ** En los siguientes ejercicios, use math.h cuando lo necesite
 
