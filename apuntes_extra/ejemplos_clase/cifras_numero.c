@@ -8,7 +8,7 @@ int main()
 	scanf("%d", &num_entero);
 	
 	c = num_entero / 100;
-    d = (num_entero%100)/10;
+	d = (num_entero%100)/10;
 	u = num_entero % 10;
 	
 	printf("centenas: %d\n", c);
