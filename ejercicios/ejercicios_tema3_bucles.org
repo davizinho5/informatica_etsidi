@@ -240,6 +240,41 @@ int main()
 
 Realiza un programa que muestre por pantalla los números primos comprendidos entre el 1 y el 300. Recuerda que un número entero es primo si es divisible únicamente por sí mismo y por la unidad. 
 
+Solución 1, se basa en, para cada número, contar sus divisores (números que hacer que el resto de la división sea CERO, obviando el 1 y el mismo número). Por ejemplo, el número 6 tiene 2 divisores, el 2 y el 3. Si un número tiene algún divisor, entonces es que no es primo. 
+
+#+BEGIN_SRC C
+#include <stdio.h>
+
+int main()
+{
+  int n, k;
+  // variable que controla si es primo o no
+  int cuenta_div = 0;
+
+  for(n = 2; n <= 300; n++)
+  {
+    // Suponemos que el numero es primo, lo inicializamos para cada número a comprobar
+    cuenta_div = 0;
+    for(k = 2; k < n; k++)
+    {
+      // Si es divisible por algun numero deja de ser primo
+      if (n % k == 0)
+      {
+        cuenta_div++;
+      }
+    }
+    // Si finalmente es primo, lo muestra en pantalla
+    if (cuenta_div == 0)
+    {
+      printf("El numero %d es primo\n", n);
+    }
+  }
+  
+  return 0;
+}			
+#+END_SRC
+
+Solución 2, usar una variable de tipo bandera (flag) que marca si un número es primo (valor 1), o no lo es (valor 0). PAra cada número, suponemos que el número es promo y, si encontramos un divisor, marcamos que no lo es. 
 #+BEGIN_SRC C
 #include <stdio.h>
 
