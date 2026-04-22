@@ -121,11 +121,14 @@ int main()
 
 float cent2fahr(float tc)
 {
-  return (9.0 / 5.0) * tc + 32;  
+  // se puede guardar el resultado en una variable y luego devolverlo
+  float resultado = (9.0 / 5.0) * tc + 32;
+  return resultado;  
 }
 
 float fahr2cent(float tf)
 {
+  // o se puede devolver directamente
   return (5.0 / 9.0) * (tf - 32);  
 }
 #+END_SRC
@@ -177,7 +180,7 @@ float dist (float x1, float y1, float x2, float y2);
 #include <stdio.h>
 #include <math.h>
 
-double dist (float x1, float y1, float x2, float y2);
+float dist (float x1, float y1, float x2, float y2);
 
 int main()
 {
@@ -196,9 +199,9 @@ int main()
   return 0;
 }
 
-double dist (float x1, float y1, float x2, float y2)
+float dist (float x1, float y1, float x2, float y2)
 {
-  double dx2, dy2, d;
+  float dx2, dy2, d;
   dx2 = pow(x1 - x2, 2);
   dy2 = pow(y1 - y2, 2);
   d = sqrt(dx2 + dy2);
@@ -214,7 +217,6 @@ Escribe un programa que calcule y muestre en pantalla el máximo de tres valores
 
 int max2(int a, int b);
 int max3(int a, int b, int c);
-
 
 int main()
 {
@@ -308,14 +310,14 @@ $a_i =(i+2)/10, i = 1, 3, ..., n$
 a través de una función con el prototipo dado al final del enunciado, siendo n un número entero que se solicita al usuario desde el main() hasta que el  usuario teclee un numero mayor que cero.
 
 #+BEGIN_SRC C
-float TerminoN (int n);
+float calc_termino (int n);
 #+END_SRC
 
 #+BEGIN_SRC C
 #include <stdio.h>
 
 // Prototipo de la función TerminoN
-float TerminoN(int n);
+float calc_termino(int n);
 
 int main() 
 {
@@ -324,19 +326,20 @@ int main()
     // Solicitar el valor de n hasta que sea mayor que 0
     do 
     {
-        printf("Introduce un número entero mayor que cero: ");
+        printf("Introduce un numero entero mayor que cero: ");
         scanf("%d", &n);
         if (n <= 0) 
         {
-            printf("El número debe ser mayor que cero. Inténtelo de nuevo.\n");
+            printf("El numero debe ser mayor que cero. Intentelo de nuevo.\n");
         }
     } while (n <= 0);
 
     // Calcular y mostrar los n primeros términos impares de la serie
-    printf("Los primeros %d términos impares de la serie son:\n", n);
-    for (int i = 1; i <= n; i++) 
+    printf("Los primeros %d terminos impares de la serie son:\n", n);
+    int i;
+    for (i = 1; i <= n; i++) 
     {
-        printf("%.2f ", TerminoN(i));
+        printf("%.2f ", calc_termino(i));
     }
     printf("\n");
 
@@ -344,13 +347,56 @@ int main()
 }
 
 // Definición de la función TerminoN
-float TerminoN(int n) 
+float calc_termino(int n) 
 {
     // El i-ésimo término impar corresponde a (2n - 1)
     int i = 2 * n - 1;
     return (float)(i + 2) / 10.0;
 }
 #+END_SRC
+
+Otra posible manera de resolverlo:
+
+#+BEGIN_SRC C
+#include <stdio.h>
+
+// Prototipo de la función calc_termino
+float calc_termino(int n);
+
+int main() 
+{
+    int n;
+
+    // Solicitar el valor de n hasta que sea mayor que 0
+    do 
+    {
+        printf("Introduce un numero entero mayor que cero: ");
+        scanf("%d", &n);
+        if (n <= 0) 
+        {
+            printf("El numero debe ser mayor que cero. Intentelo de nuevo.\n");
+        }
+    } while (n <= 0);
+
+    // Calcular y mostrar los n primeros términos impares de la serie
+    printf("Los primeros %d terminos impares de la serie son:\n", n);
+    int i;
+    for (i = 1; i <= 2*n; i=i+2) 
+    {
+        printf("%.2f ", calc_termino(i));
+    }
+    printf("\n");
+
+    return 0;
+}
+
+// Definición de la función TerminoN
+float calc_termino(int n) 
+{
+    return (float)(n + 2) / 10.0;
+}
+#+END_SRC
+
 
 
 * Números combinatorios
@@ -381,19 +427,15 @@ int main()
   return 0;
 }
 
-int factorial(int x)
+int factorial(int n)
 {
-  int res;
-
-  if (x <= 1)
+  int i;
+  int fact = 1;
+  for (i = 1; i <= n; i++)
   {
-    res = 1;
+  	fact = fact * i;
   }
-  else
-  {
-    res = x * factorial(x -1);
-  }
-  return res;
+  return fact;
 }
 
 int combina (int n, int k)
@@ -421,8 +463,8 @@ El programa estará construido en base a tres funciones: =factorial= calcula el 
 
 #+BEGIN_SRC C :exports code
 float exponencial(float x, int n);
-double potencia(float x, int n);
-long int factorial(int n);
+flo potencia(float x, int n);
+int factorial(int n);
 #+END_SRC
 
 El programa solicitará al usuario en =main= el valor del número real y del número de términos deseados. No se debe utilizar la librería =math.h=.
@@ -431,9 +473,8 @@ El programa solicitará al usuario en =main= el valor del número real y del nú
 #include <stdio.h>
 
 float exponencial(float x, int n);
-double potencia(float x, int n);
-long int factorial(int n);
-
+float potencia(float x, int n);
+int factorial(int n);
 
 int main()
 {
@@ -451,58 +492,63 @@ float exponencial (float x, int n)
   int i;
   float suma = 1;
   for (i = 1; i <= n; i++)
-    {
-      suma += potencia(-x, i) / factorial(i);
-    }
+  {
+      suma = suma + potencia(-x, i) / factorial(i);
+  }
   return suma;
 }
 
-double potencia (float x, int n)
+float potencia (float x, int n)
 {
   int i;
   double p = 1.0;
   for (i = 1; i <= n; i++)
-      p *= x;
+  {
+      p = p * x;
+  }
   return p;
 }
 
-long int factorial(int n)
+int factorial(int n)
 {
   int i;
-  long int res = 1;
+  int res = 1;
   for (i = 1; i <= n; i++)
-    res *= i;
+  {
+  	res = res * i;
+  }
   return res;
 }
 #+END_SRC
 
 
-* Fibonacci
+* Fibonacci (Recursividad, funciones ue se llaman a si mismas)
 Escribe un programa que genere los =n= primeros términos de la serie de Fibonacci *usando una función recursiva*. El número entero =n= deberá ser leído por teclado. Este valor debe ser positivo, de forma que si el usuario introduce un valor negativo el programa volverá a pedir que lo introduzca.
 
 En la serie de Fibonacci los dos primeros números son 1, y el resto se obtiene sumando los dos anteriores: $1, 1, 2, 3, 5, 8, 13, 21, \ldots$
 
+Para las pruebas, usar valores de n mnores a 15.
+
 #+BEGIN_SRC C
 #include <stdio.h>
 
-long long int fib(int n);
+int fib(int n);
 
 int main()
 {
   int i, num;
-
   scanf("%d", &num);
 
   for (i = 1; i <= num; i++)
   {
-    printf("%d \t %lld\n", i, fib(i));
+    printf("%d \t %d\n", i, fib(i));
   }
   return 0;
 }
 
-long long int fib(int n)
+int fib(int n)
 {
-  long long int res;
+  int res;
   if (n == 1 || n == 2)
   {
     res = 1;
