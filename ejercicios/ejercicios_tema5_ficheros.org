@@ -594,7 +594,7 @@ int main()
   else
   {
     pescritura=fopen("moratalaz.csv", "w");
-  if (plectura == NULL)
+  if (pescritura == NULL)
   {
     printf("Error al abrir el fichero de lectura.\n");
     return -1;
