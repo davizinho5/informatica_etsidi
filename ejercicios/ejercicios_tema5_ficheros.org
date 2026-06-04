@@ -601,7 +601,7 @@ int main()
   }
   else
   {
-      fprintf(pescritura, "mes, dia, anho, valor\n", medidas[i].num_estacion, medidas[i].dia, medidas[i].mes, medidas[i].anho, medidas[i].valor);      
+      fprintf(pescritura, "mes, dia, anho, valor\n");      
       while(fscanf(plectura, "%d;%d;%d;%d;%d", &medidas[i].num_estacion, &medidas[i].dia, &medidas[i].mes, &medidas[i].anho, &medidas[i].valor) != EOF)
       {     
         if(moratalaz == medidas[i].num_estacion)
